@@ -2,94 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ΔIf</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ΔIf — The One Who Assumed</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --text-main: #111;
+      --text-muted: #666;
+      --line: #e5e5e5;
+      --bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 60px;
+    }
+
+    /* HEADER */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 120px;
+    }
+
+    .title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      margin: 0 0 12px 0;
+    }
+
+    .subtitle {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .questions {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      line-height: 1.6;
+    }
+
+    /* IMAGE */
+    .cover img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: none; /* ❗ griyi kesin kapatır */
+    }
+
+    /* DIVIDER */
+    .divider {
+      border-top: 1px solid var(--line);
+      margin: 120px 0;
+    }
+
+    /* EDITORIAL TEXT */
+    .editorial {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      line-height: 1.8;
+    }
+
+    .editorial p {
+      margin-bottom: 36px;
+    }
+
+    /* TWO COLUMN ESSAY */
+    .essay {
+      margin-top: 120px;
+      column-count: 2;
+      column-gap: 80px;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .essay h2 {
+      font-family: 'Playfair Display', serif;
+      column-span: all;
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      margin-top: 160px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .header {
+        grid-template-columns: 1fr;
+      }
+
+      .essay {
+        column-count: 1;
+      }
+
+      .page {
+        padding: 60px 24px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <main class="page">
 
-  <!-- COVER -->
-  <header class="cover">
-    <div class="cover-grid">
-
-      <div class="cover-text">
+    <!-- HEADER -->
+    <section class="header">
+      <div class="title">
         <h1>ΔIf</h1>
-        <p class="author">The One Who Assumed</p>
-
-        <p class="question">What if it were missing?</p>
-        <p class="question">What if it were excessive?</p>
+        <div class="subtitle">The One Who Assumed</div>
+        <div class="questions">
+          What if it were missing?<br>
+          What if it were excessive?
+        </div>
       </div>
 
-      <div class="cover-image">
-        <img src="cover.jpg" alt="Editorial cover image">
+      <div class="cover">
+        <img src="cover.jpg" alt="ΔIf Cover">
       </div>
+    </section>
 
-    </div>
-  </header>
-<section class="editorial">
-  <article>
-    <h2>If it were missing</h2>
-    <p>
-      What disappears first is not the object,
-      but the assumption that it was ever necessary.
-    </p>
-  </article>
+    <div class="divider"></div>
 
-  <article>
-    <h2>If it were excessive</h2>
-    <p>
-      Excess does not announce itself.
-      It arrives as comfort.
-    </p>
-  </article>
-</section>
+    <!-- MANIFESTO -->
+    <section class="editorial">
+      <p><strong>ΔIf</strong> is a counterfactual archive.</p>
 
-  <!-- MANIFESTO -->
-  <section class="manifesto">
-    <p class="manifesto-lead">
-      ΔIf is a counterfactual archive.
-    </p>
+      <p>
+        It does not describe what is.
+        It asks what would remain if something were missing —
+        or what would collapse if it were excessive.
+      </p>
 
-    <p>
-      It does not describe what is.
-      It asks what would remain if something were missing —
-      or what would collapse if it were excessive.
-    </p>
+      <p>
+        Every text here assumes a condition and follows its consequences.
+      </p>
+    </section>
 
-    <p>
-      Every text here assumes a condition
-      and follows its consequences.
-    </p>
-  </section>
+    <!-- ESSAY -->
+    <section class="essay">
+      <h2>Assumption</h2>
 
-  <!-- THEMES -->
-  <section class="themes">
-    <a href="absence.html">Absence</a>
-    <a href="excess.html">Excess</a>
-    <a href="assumption.html">Assumption</a>
-  </section>
+      <p>
+        What disappears first is not the object,
+        but the assumption that it was ever necessary.
+      </p>
 
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ΔIf</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+      <p>
+        Excess does not announce itself.
+        It arrives disguised as comfort,
+        repeating itself until absence feels violent.
+      </p>
+    </section>
 
-  <section class="cover">
-    <div class="cover-overlay">
-      <h1>ΔIf</h1>
-      <p class="tagline">If it were missing / If it were excessive</p>
-    </div>
-  </section>
+    <footer>
+      ΔIf — A counterfactual editorial archive
+    </footer>
 
+  </main>
 </body>
 </html>
