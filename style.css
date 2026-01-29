@@ -82,3 +82,24 @@ body {
   color: #000;
   border-bottom-color: #000;
 }
+.container {
+  max-width: 680px;
+  margin: 120px auto;
+  padding: 0 24px;
+}
+
+.container h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  margin-bottom: 80px;
+}
+
+.entry {
+  margin-bottom: 96px;
+}
+
+.entry-lead {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
