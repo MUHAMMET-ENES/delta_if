@@ -10,43 +10,53 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+/* COVER */
+
 .cover {
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .cover-inner {
   max-width: 680px;
-  padding: 0 24px;
+  padding-left: 24px;
 }
 
 .cover-title {
   font-family: 'Playfair Display', serif;
   font-size: 72px;
   font-weight: 600;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
   letter-spacing: -1px;
+}
+
+.cover-author {
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 48px;
 }
 
 .cover-question {
   font-family: 'Playfair Display', serif;
   font-size: 30px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
-.cover-author {
-  margin-top: 48px;
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #666;
+.scroll-hint {
+  margin-top: 64px;
+  font-size: 20px;
+  color: #999;
 }
+
+/* MANIFESTO */
+
 .manifesto {
   max-width: 680px;
-  margin: 120px auto;
-  padding: 0 24px;
+  margin: 120px 0;
+  padding-left: 24px;
 }
 
 .manifesto p {
@@ -55,15 +65,13 @@ body {
   line-height: 1.7;
   margin-bottom: 32px;
 }
-.scroll-hint {
-  margin-top: 80px;
-  font-size: 20px;
-  color: #999;
-}
+
+/* THEMES */
+
 .themes {
   max-width: 680px;
-  margin: 160px auto;
-  padding: 0 24px;
+  margin: 160px 0 200px 0;
+  padding-left: 24px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -79,27 +87,5 @@ body {
 }
 
 .themes a:hover {
-  color: #000;
   border-bottom-color: #000;
-}
-.container {
-  max-width: 680px;
-  margin: 120px auto;
-  padding: 0 24px;
-}
-
-.container h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  margin-bottom: 80px;
-}
-
-.entry {
-  margin-bottom: 96px;
-}
-
-.entry-lead {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  margin-bottom: 16px;
 }
