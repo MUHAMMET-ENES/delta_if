@@ -3,21 +3,22 @@
     --bg-color: #f8f8f6;
     --text-main: #1a1a1a;
     --text-muted: #666;
-    --accent: #000;
+    --line-color: #e5e5e5;
+    --cursor-color: #000;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
-    --line-color: #e5e5e5;
 }
 
 body.dark-mode {
     --bg-color: #0a0a0a;
     --text-main: #e0e0e0;
     --text-muted: #888;
-    --accent: #fff;
-    --line-color: #222;
+    --line-color: #333;
+    --cursor-color: #fff;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ================= TEMEL AYARLAR ================= */
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Standart imleci gizle */ }
 
 body {
     background-color: var(--bg-color);
@@ -28,69 +29,67 @@ body {
     transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* OKUMA ÇUBUĞU */
-#progress-bar {
+/* ÖZEL İMLEÇ (DELTA) */
+#custom-cursor {
     position: fixed;
     top: 0;
     left: 0;
-    width: 0%;
-    height: 4px;
-    background: var(--text-main);
-    z-index: 9999;
-    transition: width 0.1s ease;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--cursor-color);
+    transform: translate(-50%, -50%) rotate(0deg);
+    pointer-events: none;
+    z-index: 10000;
+    transition: width 0.3s, height 0.3s, background 0.3s, transform 0.1s;
+    /* Delta Üçgeni Şekli (Clip-path ile) */
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background: transparent;
 }
 
-/* REVEAL EFEKTİ */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px) scale(0.98);
-    transition: all 1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-    visibility: hidden;
+/* Link üzerine gelince imleç */
+body.hovering #custom-cursor {
+    width: 40px;
+    height: 40px;
+    background: rgba(128, 128, 128, 0.2);
+    border-color: transparent;
 }
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    visibility: visible;
-}
+
+/* ================= DİL KONTROLÜ (KESİN ÇÖZÜM) ================= */
+/* Varsayılan olarak her iki dili de gizle */
+[data-lang="en"], [data-lang="tr"] { display: none; }
+
+/* Body sınıfına göre dili aç */
+body.lang-en [data-lang="en"] { display: block; animation: fadeIn 0.5s ease; }
+body.lang-tr [data-lang="tr"] { display: block; animation: fadeIn 0.5s ease; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ================= NAVİGASYON ================= */
 .top-nav {
     position: absolute;
-    top: 40px;
+    top: 30px;
     right: 40px;
     z-index: 100;
     display: flex;
     gap: 15px;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
 .tool-btn {
     background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: #fff; /* Hero üzerindeyken beyaz */
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff; /* Hero üzerindeyken */
     padding: 8px 16px;
-    cursor: pointer;
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    backdrop-filter: blur(4px);
     transition: all 0.3s;
-    backdrop-filter: blur(5px);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 .tool-btn:hover { background: #fff; color: #000; }
+.tool-btn.active { border-bottom: 2px solid #fff; }
 
-/* Müzik Çalar Aktifken */
-.music-playing {
-    border-color: #4CAF50;
-    color: #4CAF50;
-}
-
-/* ================= HERO SECTION ================= */
+/* ================= HERO SECTION (Düzeltildi) ================= */
 .hero-section {
     position: relative;
     width: 100%;
@@ -101,88 +100,153 @@ body {
     text-align: center;
     color: #fff;
     background-color: #000;
+    overflow: hidden;
 }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* En arkada */
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6; /* Metin okunsun diye */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Resmin üstünde */
+    max-width: 900px;
+    padding: 0 20px;
+}
+
 .hero-content h1 {
     font-family: var(--font-heading);
     font-size: clamp(4rem, 10vw, 7rem);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
 }
 
-/* ================= İÇERİK ================= */
+.subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+/* ================= İÇERİK ALANLARI ================= */
 .page-container {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 100px 40px;
 }
 
+/* About */
 .about-section {
-    max-width: 800px;
-    margin: 0 auto 100px auto;
     text-align: center;
-    border-bottom: 1px solid var(--line-color);
+    margin-bottom: 120px;
     padding-bottom: 60px;
-}
-
-.essay-item {
-    margin-bottom: 80px;
-    padding-bottom: 40px;
     border-bottom: 1px solid var(--line-color);
+}
+.about-section h2 { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 20px; }
+
+/* Essays Grid */
+.essay-item {
+    margin-bottom: 100px;
 }
 
 .essay-meta {
     font-size: 0.8rem;
     color: var(--text-muted);
-    margin-bottom: 10px;
-    text-transform: uppercase;
     letter-spacing: 0.1em;
-    display: flex;
-    justify-content: space-between;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: block;
 }
 
-.essay-actions {
-    margin-top: 20px;
-    display: flex;
-    gap: 15px;
+.essay-item h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
-.action-link {
-    font-size: 0.8rem;
+.essay-body {
+    font-size: 1.1rem;
     color: var(--text-main);
-    text-decoration: none;
-    border-bottom: 1px solid var(--text-muted);
-    padding-bottom: 2px;
-    transition: opacity 0.3s;
-    cursor: pointer;
-}
-.action-link:hover { opacity: 0.6; }
-
-/* ================= FOOTER ================= */
-footer {
-    padding: 60px 20px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
     margin-bottom: 30px;
 }
 
-.social-icon {
-    width: 24px;
-    height: 24px;
-    fill: var(--text-main);
+/* THE LAB (Yeni Bölüm) */
+.lab-section {
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.lab-header {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 60px;
+    font-style: italic;
+}
+
+.lab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+.lab-card {
+    border: 1px solid var(--line-color);
+    padding: 30px;
     transition: transform 0.3s;
 }
-.social-icon:hover { transform: translateY(-3px); }
+
+.lab-card:hover { transform: translateY(-5px); border-color: var(--text-main); }
+
+.lab-tag {
+    font-size: 0.7rem;
+    border: 1px solid var(--text-muted);
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+/* GISCUS (Yorumlar) */
+.comments-section {
+    margin-top: 100px;
+    padding-top: 60px;
+    border-top: 1px solid var(--line-color);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 60px 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--line-color);
+}
 
 /* MOBİL */
 @media (max-width: 768px) {
-    .top-nav { top: 20px; right: 20px; }
+    .top-nav { top: 20px; right: 20px; gap: 10px; }
     .hero-content h1 { font-size: 3.5rem; }
-    .essay-meta { flex-direction: column; gap: 5px; }
+    .page-container { padding: 60px 20px; }
+    .lab-grid { grid-template-columns: 1fr; }
 }
+
+/* REVEAL Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
