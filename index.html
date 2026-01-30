@@ -14,7 +14,6 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -57,7 +56,7 @@
 
     <main class="page-container">
         
-        <section class="manifesto">
+        <section class="manifesto reveal">
             <div class="content-en visible">
                 <p><strong>ΔIf</strong> is a counterfactual archive.</p>
                 <p>It does not describe what is. It asks what would remain if something were missing — or what would collapse if it were excessive.</p>
@@ -68,7 +67,7 @@
             </div>
         </section>
 
-        <section class="essays-grid">
+        <section class="essays-grid reveal">
             <article class="content-en visible essay-item">
                 <h2>Assumption of Absence</h2>
                 <p class="drop-cap">
@@ -106,7 +105,25 @@
             </article>
         </section>
 
-        <footer>
+        <footer class="reveal">
+            
+            <div class="newsletter-section">
+                <div class="content-en visible">
+                    <p style="font-style:italic">Subscribe to the silence.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed (Demo)');">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="newsletter-btn">Notify Me</button>
+                    </form>
+                </div>
+                <div class="content-tr">
+                    <p style="font-style:italic">Sessizliğe abone ol.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Abone olundu (Demo)');">
+                        <input type="email" class="newsletter-input" placeholder="E-posta adresin">
+                        <button type="submit" class="newsletter-btn">Haber Ver</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="content-en visible">
                 <p>ΔIf — A counterfactual editorial archive</p>
                 <p class="license">Except where otherwise noted, content is licensed under CC BY-NC-ND 4.0</p>
@@ -122,7 +139,43 @@
     </main>
 
     <script>
-        // Dil Değiştirme Fonksiyonu
+        // 1. FOCUS MODE (Sekme değişince başlık değişir)
+        let docTitle = document.title;
+        window.addEventListener("blur", () => {
+            document.title = "Missing... | ΔIf";
+        });
+        window.addEventListener("focus", () => {
+            document.title = docTitle;
+        });
+
+        // 2. SCROLL REVEAL (Kaydırdıkça belirme)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Sayfa ilk yüklendiğinde de çalıştır (manifesto görünsün diye)
+        reveal();
+
+        // 3. OKUMA ÇUBUĞU
+        window.onscroll = function() {
+            // Reveal fonksiyonunu da tetikle
+            reveal(); 
+            
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // 4. DİL DEĞİŞTİRME
         function setLanguage(lang) {
             document.querySelectorAll('.content-en, .content-tr').forEach(el => el.classList.remove('visible'));
             document.querySelectorAll('#btn-en, #btn-tr').forEach(el => el.classList.remove('active'));
@@ -135,14 +188,6 @@
                 document.getElementById('btn-tr').classList.add('active');
             }
         }
-
-        // Okuma Çubuğu Fonksiyonu
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-        };
     </script>
 </body>
 </html>
