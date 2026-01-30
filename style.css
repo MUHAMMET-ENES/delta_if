@@ -3,9 +3,9 @@
     --bg-color: #f8f8f6;
     --text-main: #1a1a1a;
     --text-muted: #666;
-    --line-color: #e5e5e5;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
+    --line-color: #e5e5e5;
 }
 
 /* ================= TEMEL AYARLAR ================= */
@@ -17,25 +17,86 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     overflow-x: hidden;
-    transition: background-color 0.5s ease;
 }
 
-/* Seçim Rengi (Premium His) */
 ::selection { background: #333; color: #fff; }
 
-.page-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 80px 40px;
+/* ================= HERO SECTION ================= */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    overflow: hidden;
 }
 
-/* ================= DİL ANAHTARI ================= */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.75; 
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+    animation: fadeUp 1.2s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 6rem;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-bottom: 2rem;
+    display: block;
+    opacity: 0.9;
+}
+
+.questions {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    line-height: 1.4;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* ================= NAVİGASYON & DİL ================= */
 .lang-switch {
     position: absolute;
     top: 40px;
     right: 40px;
     font-size: 0.85rem;
-    z-index: 100;
+    z-index: 10;
+    color: #fff;
 }
 
 .lang-switch button {
@@ -44,97 +105,38 @@ body {
     cursor: pointer;
     font-family: var(--font-body);
     font-weight: 500;
-    opacity: 0.4;
+    color: #fff;
+    opacity: 0.6;
     transition: opacity 0.3s;
     letter-spacing: 0.1em;
 }
 
-.lang-switch button.active {
-    opacity: 1;
-    border-bottom: 1px solid currentColor;
+.lang-switch button.active { opacity: 1; border-bottom: 1px solid #fff; }
+.lang-switch .separator { margin: 0 8px; opacity: 0.4; }
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 1.5rem;
+    z-index: 2;
+    animation: bounce 2s infinite;
+    opacity: 0.7;
 }
 
-.lang-switch .separator { margin: 0 8px; opacity: 0.2; }
-
-/* ================= KAPAK (HEADER) ================= */
-.header-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 60px;
-    align-items: center;
-    min-height: 80vh;
-    margin-bottom: 120px;
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+    40% {transform: translateX(-50%) translateY(-10px);}
+    60% {transform: translateX(-50%) translateY(-5px);}
 }
 
-.title-block h1 {
-    font-family: var(--font-heading);
-    font-size: 5.5rem;
-    line-height: 1;
-    margin-bottom: 1rem;
-    letter-spacing: -0.04em;
-}
-
-.subtitle {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: var(--text-muted);
-    margin-bottom: 3rem;
-    display: block;
-}
-
-.questions {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    line-height: 1.4;
-    color: #333;
-}
-
-/* ================= GÖRSEL & ISSUE FİLTRELERİ ================= */
-.cover-wrapper {
-    position: relative;
-    overflow: hidden;
-}
-
-.cover-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0;
-    transform: scale(1.02);
-    animation: imageReveal 1.5s ease forwards 0.3s;
-    transition: filter 1s ease;
-}
-
-@keyframes imageReveal {
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* Issue 1: Missing (Gri/Soluk) */
-body.issue-missing .cover-wrapper img {
-    filter: grayscale(100%) contrast(90%) brightness(105%);
-}
-
-/* Issue 2: Excessive (Canlı/Sıcak) */
-body.issue-excessive .cover-wrapper img {
-    filter: saturate(140%) contrast(110%) sepia(15%);
-}
-
-/* Issue 3: Collapse (Karanlık/Sert) */
-body.issue-collapse {
-    background-color: #f0f0f0;
-    color: #000;
-}
-body.issue-collapse .cover-wrapper img {
-    filter: grayscale(100%) contrast(140%) brightness(80%);
-}
-
-/* ================= MANIFESTO & DENEMELER ================= */
-.divider {
-    height: 1px;
-    background: var(--line-color);
-    width: 100%;
-    margin: 0 0 100px 0;
+/* ================= İÇERİK ALANI ================= */
+.page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 120px 40px;
 }
 
 .manifesto {
@@ -147,6 +149,7 @@ body.issue-collapse .cover-wrapper img {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    color: var(--text-main);
 }
 
 .essays-grid {
@@ -165,12 +168,8 @@ body.issue-collapse .cover-wrapper img {
     padding-bottom: 8px;
 }
 
-.essay-item p {
-    font-size: 1.05rem;
-    text-align: justify;
-}
+.essay-item p { font-size: 1.05rem; text-align: justify; }
 
-/* Drop Cap (Büyük Başlangıç Harfi) */
 .drop-cap::first-letter {
     float: left;
     font-family: var(--font-heading);
@@ -180,52 +179,7 @@ body.issue-collapse .cover-wrapper img {
     margin-top: 4px;
 }
 
-/* ================= DİL GEÇİŞ ANİMASYONU ================= */
-.content-en, .content-tr {
-    display: none;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.content-en.visible, .content-tr.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ================= FOOTER ================= */
-footer {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    border-top: 1px solid var(--line-color);
-    padding-top: 60px;
-    padding-bottom: 40px;
-}
-
-.license { margin-top: 10px; font-size: 0.75rem; opacity: 0.7; }
-
-/* ================= RESPONSIVE (MOBİL) ================= */
-@media (max-width: 900px) {
-    .page-container { padding: 40px 24px; }
-    
-    .header-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-        min-height: auto;
-    }
-
-    .cover-wrapper { order: -1; } /* Mobilde görsel üstte */
-    
-    .title-block h1 { font-size: 4rem; }
-    
-    .essays-grid { grid-template-columns: 1fr; gap: 60px; }
-    
-    .essay-item p { text-align: left; }
-}
-/* ================= ARŞİV SAYFASI STILLERİ ================= */
+/* ================= ARŞİV SAYFASI (EKLENDİ) ================= */
 .archive-nav {
     padding: 40px;
     position: absolute;
@@ -245,10 +199,7 @@ footer {
 
 .back-link:hover { opacity: 1; }
 
-.archive-header {
-    margin-top: 80px;
-    text-align: center;
-}
+.archive-header { margin-top: 80px; text-align: center; }
 
 .archive-header h1 {
     font-family: var(--font-heading);
@@ -256,24 +207,18 @@ footer {
     margin-bottom: 0.5rem;
 }
 
-/* Liste Yapısı */
-.archive-list {
-    max-width: 800px;
-    margin: 0 auto;
-}
+.archive-list { max-width: 800px; margin: 0 auto; }
 
 .archive-item {
     display: grid;
-    grid-template-columns: 150px 1fr; /* Sol taraf tarih, sağ taraf başlık */
+    grid-template-columns: 150px 1fr;
     padding: 40px 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     align-items: baseline;
     transition: transform 0.3s ease;
 }
 
-.archive-item:hover {
-    transform: translateX(10px); /* Hafif sağa kayma efekti */
-}
+.archive-item:hover { transform: translateX(10px); }
 
 .archive-item .meta {
     font-family: var(--font-body);
@@ -300,10 +245,39 @@ footer {
     font-style: italic;
 }
 
-/* Mobil Arşiv */
-@media (max-width: 700px) {
-    .archive-item {
-        grid-template-columns: 1fr; /* Mobilde alt alta */
-        gap: 15px;
-    }
+/* ================= FOOTER & DİĞER ================= */
+.divider {
+    height: 1px;
+    background: var(--line-color);
+    width: 100%;
+    margin: 0 0 100px 0;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--line-color);
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.license { margin-top: 10px; font-size: 0.75rem; opacity: 0.7; }
+
+.content-en, .content-tr {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.content-en.visible, .content-tr.visible { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* MOBİL */
+@media (max-width: 900px) {
+    .hero-content h1 { font-size: 4rem; }
+    .questions { font-size: 1.4rem; }
+    .essays-grid { grid-template-columns: 1fr; gap: 60px; }
+    .page-container { padding: 60px 24px; }
+    .archive-item { grid-template-columns: 1fr; gap: 15px; }
 }
