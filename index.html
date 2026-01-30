@@ -1,193 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ΔIf — The One Who Assumed</title>
-    <meta name="description" content="A counterfactual archive. What would remain if something were missing?">
-    <meta property="og:title" content="ΔIf — The One Who Assumed">
-    <meta property="og:description" content="A counterfactual archive. What would remain if something were missing?">
-    <meta property="og:image" content="cover.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
-<body class="issue-missing">
+<body>
 
     <div id="progress-bar"></div>
 
+    <div class="top-nav">
+        <button class="tool-btn" onclick="toggleDarkMode()">Tema Değiştir</button>
+        <button class="tool-btn" onclick="readPageContent()">Yazıyı Dinle</button>
+        <button class="tool-btn" onclick="setLanguage('en')">EN</button>
+        <button class="tool-btn" onclick="setLanguage('tr')">TR</button>
+    </div>
+
     <header class="hero-section">
-        <div class="hero-bg">
-            <img src="cover.jpg" alt="Editorial Cover Art">
-            <div class="overlay"></div>
+        <div class="hero-bg" style="position:absolute; inset:0; z-index:-1;">
+            <img src="cover.jpg" alt="Cover">
         </div>
-
-        <nav class="lang-switch">
-            <button id="btn-en" class="active" onclick="setLanguage('en')">EN</button>
-            <span class="separator">|</span>
-            <button id="btn-tr" onclick="setLanguage('tr')">TR</button>
-        </nav>
-
         <div class="hero-content">
             <h1>ΔIf</h1>
-            <div class="content-en visible">
-                <span class="subtitle">The One Who Assumed</span>
-                <div class="questions">
-                    <p>What if it were missing?</p>
-                    <p>What if it were excessive?</p>
-                </div>
-            </div>
-            <div class="content-tr">
-                <span class="subtitle">Varsayım Yapan</span>
-                <div class="questions">
-                    <p>Ya eksik olsaydı?</p>
-                    <p>Ya fazla olsaydı?</p>
-                </div>
-            </div>
+            <p class="subtitle content-en visible">The One Who Assumed</p>
+            <p class="subtitle content-tr">Varsayım Yapan</p>
         </div>
-        
-        <div class="scroll-indicator">↓</div>
     </header>
 
     <main class="page-container">
         
-        <section class="manifesto reveal">
+        <section class="about-section reveal">
+            <h2 class="content-en visible">About the Archive</h2>
+            <h2 class="content-tr">Arşiv Hakkında</h2>
             <div class="content-en visible">
-                <p><strong>ΔIf</strong> is a counterfactual archive.</p>
-                <p>It does not describe what is. It asks what would remain if something were missing — or what would collapse if it were excessive.</p>
+                <p>ΔIf is a curated collection of counterfactual thoughts, produced by <strong>Kalemli Süvari</strong>. It explores the delicate balance between what exists and what could have been.</p>
             </div>
             <div class="content-tr">
-                <p><strong>ΔIf</strong> bir karşı-olgusal arşivdir.</p>
-                <p>Olanı anlatmaz. Bir şey eksik olsaydı geriye ne kalacağını — ya da aşırı olsaydı neyin çökeceğini sorar.</p>
+                <p>ΔIf, <strong>Kalemli Süvari</strong> tarafından hazırlanan karşı-olgusal düşünceler seçkisidir. Var olan ile olabilecek olan arasındaki hassas dengeyi araştırır.</p>
             </div>
         </section>
 
-        <section class="essays-grid reveal">
-            <article class="content-en visible essay-item">
-                <h2>Assumption of Absence</h2>
-                <p class="drop-cap">
-                    What disappears first is not the object, but the assumption that it was ever necessary. 
-                    Silence does not answer questions; it simply removes the space where the question could stand. 
-                    Without the structure we rely on, meaning does not vanish—it simply becomes fluid.
-                </p>
+        <section class="essays-grid">
+            <article class="essay-item reveal">
+                <h2 class="content-en visible">Assumption of Absence</h2>
+                <h2 class="content-tr">Yokluk Varsayımı</h2>
+                <div class="content-en visible">
+                    <p>What if silence was the only language we had left? Meaning would drift from sounds to gestures, and finally, to the space between us.</p>
+                </div>
+                <div class="content-tr">
+                    <p>Ya elimizde kalan tek dil sessizlik olsaydı? Anlam sesten jestlere, ve sonunda aramızdaki boşluğa sürüklenirdi.</p>
+                </div>
             </article>
 
-            <article class="content-en visible essay-item">
-                <h2>Assumption of Excess</h2>
-                <p>
-                    Excess does not announce itself. It arrives disguised as comfort, repeating itself 
-                    until the absence of noise feels like violence. When a signal is everywhere, it ceases 
-                    to be information and becomes environment.
-                </p>
-            </article>
-
-            <article class="content-tr essay-item">
-                <h2>Yokluk Varsayımı</h2>
-                <p class="drop-cap">
-                    İlk kaybolan şey nesnenin kendisi değil, onun gerekli olduğuna dair varsayımdır. 
-                    Sessizlik sorulara cevap vermez; sadece sorunun durabileceği zemini ortadan kaldırır. 
-                    Güvendiğimiz yapı olmadan anlam yok olmaz; sadece akışkanlaşır.
-                </p>
-            </article>
-
-            <article class="content-tr essay-item">
-                <h2>Aşırılık Varsayımı</h2>
-                <p>
-                    Aşırılık kendini duyurarak gelmez. Konfor kılığında gelir, gürültünün yokluğu şiddet 
-                    gibi hissedilene kadar kendini tekrar eder. Bir sinyal her yerde olduğunda, bilgi 
-                    olmaktan çıkar ve ortama dönüşür.
-                </p>
+            <article class="essay-item reveal">
+                <h2 class="content-en visible">Assumption of Excess</h2>
+                <h2 class="content-tr">Aşırılık Varsayımı</h2>
+                <div class="content-en visible">
+                    <p>Too much of everything is functionally equivalent to nothing. When every light is on, the stars vanish.</p>
+                </div>
+                <div class="content-tr">
+                    <p>Her şeyin fazlası, işlevsel olarak hiçbir şeye eşittir. Bütün ışıklar yandığında yıldızlar kaybolur.</p>
+                </div>
             </article>
         </section>
 
         <footer class="reveal">
-            
             <div class="newsletter-section">
-                <div class="content-en visible">
-                    <p style="font-style:italic">Subscribe to the silence.</p>
-                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed (Demo)');">
-                        <input type="email" class="newsletter-input" placeholder="Your email address">
-                        <button type="submit" class="newsletter-btn">Notify Me</button>
-                    </form>
-                </div>
-                <div class="content-tr">
-                    <p style="font-style:italic">Sessizliğe abone ol.</p>
-                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Abone olundu (Demo)');">
-                        <input type="email" class="newsletter-input" placeholder="E-posta adresin">
-                        <button type="submit" class="newsletter-btn">Haber Ver</button>
-                    </form>
-                </div>
+                <p class="content-en visible">Subscribe to the silence.</p>
+                <p class="content-tr">Sessizliğe abone ol.</p>
+                <form class="newsletter-form" style="margin:20px 0">
+                    <input type="email" class="newsletter-input" placeholder="Email...">
+                    <button type="submit" class="tool-btn" style="color:var(--text-main); border-color:var(--text-main)">Kaydol</button>
+                </form>
             </div>
-
-            <div class="content-en visible">
-                <p>ΔIf — A counterfactual editorial archive</p>
-                <p class="license">Except where otherwise noted, content is licensed under CC BY-NC-ND 4.0</p>
-                <p style="margin-top: 15px;"><a href="archive.html" style="color: inherit; border-bottom: 1px solid #999; text-decoration: none;">View Archive</a></p>
-            </div>
-            <div class="content-tr">
-                <p>ΔIf — Karşı-olgusal bir düşünce arşivi</p>
-                <p class="license">Aksi belirtilmedikçe, içerikler CC BY-NC-ND 4.0 ile lisanslanmıştır</p>
-                <p style="margin-top: 15px;"><a href="archive.html" style="color: inherit; border-bottom: 1px solid #999; text-decoration: none;">Arşivi Gör</a></p>
-            </div>
+            <p>© 2026 ΔIf Archive | Produced by Kalemli Süvari</p>
         </footer>
-
     </main>
 
     <script>
-        // 1. FOCUS MODE (Sekme değişince başlık değişir)
-        let docTitle = document.title;
-        window.addEventListener("blur", () => {
-            document.title = "Missing... | ΔIf";
-        });
-        window.addEventListener("focus", () => {
-            document.title = docTitle;
-        });
-
-        // 2. SCROLL REVEAL (Kaydırdıkça belirme)
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
+        // 1. KOYU MOD SİSTEMİ
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
         }
-        window.addEventListener("scroll", reveal);
-        // Sayfa ilk yüklendiğinde de çalıştır (manifesto görünsün diye)
-        reveal();
 
-        // 3. OKUMA ÇUBUĞU
-        window.onscroll = function() {
-            // Reveal fonksiyonunu da tetikle
-            reveal(); 
+        // 2. SESLENDİRME ÖZELLİĞİ (Text-to-Speech)
+        function readPageContent() {
+            const isTr = document.querySelector('.content-tr').classList.contains('visible');
+            const selector = isTr ? '.content-tr' : '.content-en';
+            const texts = Array.from(document.querySelectorAll(selector)).map(el => el.innerText).join(" ");
             
+            const utterance = new SpeechSynthesisUtterance(texts);
+            utterance.lang = isTr ? 'tr-TR' : 'en-US';
+            utterance.rate = 0.9; // Biraz daha ağır ve edebi bir ton
+            
+            window.speechSynthesis.cancel(); // Varsa eski sesi durdur
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // 3. REVEAL EFEKTİ (Düzeltilmiş ve Optimize Edilmiş)
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add("active");
+                }
+            });
+        }
+
+        // 4. DİL SİSTEMİ
+        function setLanguage(lang) {
+            document.querySelectorAll('.content-en, .content-tr').forEach(el => el.classList.remove('visible'));
+            if (lang === 'en') {
+                document.querySelectorAll('.content-en').forEach(el => el.classList.add('visible'));
+            } else {
+                document.querySelectorAll('.content-tr').forEach(el => el.classList.add('visible'));
+            }
+            reveal(); // Dil değişince efektleri tekrar kontrol et
+        }
+
+        window.addEventListener("scroll", () => {
+            reveal();
+            // Okuma çubuğu
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = (winScroll / height) * 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
-        };
+        });
 
-        // 4. DİL DEĞİŞTİRME
-        function setLanguage(lang) {
-            document.querySelectorAll('.content-en, .content-tr').forEach(el => el.classList.remove('visible'));
-            document.querySelectorAll('#btn-en, #btn-tr').forEach(el => el.classList.remove('active'));
-
-            if (lang === 'en') {
-                document.querySelectorAll('.content-en').forEach(el => el.classList.add('visible'));
-                document.getElementById('btn-en').classList.add('active');
-            } else {
-                document.querySelectorAll('.content-tr').forEach(el => el.classList.add('visible'));
-                document.getElementById('btn-tr').classList.add('active');
-            }
-        }
+        // İlk açılışta tetikle
+        window.onload = reveal;
     </script>
 </body>
 </html>
