@@ -11,66 +11,60 @@
 
 <body class="lang-tr">
 
-    <canvas id="neural-canvas"></canvas>
-
     <div id="custom-cursor">Δ</div>
-    
-    <audio id="bg-music" loop crossorigin="anonymous">
-        <source src="ambient.mp3" type="audio/mpeg">
-    </audio>
-
     <div id="zen-exit" onclick="toggleZen()">✕</div>
-
-    <div class="the-fog"></div>
+    <audio id="bg-music" loop><source src="ambient.mp3" type="audio/mpeg"></audio>
 
     <div class="entropy-container">
-        <div class="entropy-label">Entropy</div>
-        <input type="range" min="0" max="20" value="0" id="entropy-slider" orient="vertical">
-        <div class="entropy-label">Order</div>
+        <span style="writing-mode: vertical-rl; font-size: 0.6rem; letter-spacing: 0.2em;">ENTROPY</span>
+        <input type="range" min="0" max="100" value="0" id="entropy-slider" orient="vertical">
     </div>
 
-    <div class="top-bar">
+    <div class="top-header">
         <div class="brand-name">Muhammet Enes Karaoğlan</div>
-        <nav class="nav-tools">
-            <button class="tool-btn" id="reality-btn" onclick="toggleReality()">Δ Switch Reality</button>
-            <button class="tool-btn" onclick="toggleZen()" title="Zen Mode">👁</button>
-            <button class="tool-btn" onclick="initAudio()" id="music-btn">Start Audio</button>
-            <button class="tool-btn" onclick="toggleTheme()">Theme</button>
-            <button class="tool-btn" onclick="setLang('en')">EN</button>
-            <button class="tool-btn" onclick="setLang('tr')">TR</button>
-        </nav>
+        
+        <div class="nav-controls">
+            <div class="reality-switch-container">
+                <span style="opacity:0.6">Excess</span>
+                <label class="switch">
+                    <input type="checkbox" id="reality-toggle" onchange="toggleReality()">
+                    <span class="slider"></span>
+                </label>
+                <span style="opacity:0.6">Absence</span>
+            </div>
+
+            <div class="nav-row">
+                <button class="tool-btn" onclick="toggleZen()" title="Zen Mode">👁 Zen</button>
+                <button class="tool-btn" onclick="toggleMusic()" id="music-btn">Sound</button>
+                <button class="tool-btn" onclick="toggleTheme()">Theme</button>
+                <button class="tool-btn" onclick="setLang('en')">EN</button>
+                <button class="tool-btn" onclick="setLang('tr')">TR</button>
+            </div>
+        </div>
     </div>
 
     <header class="hero-section">
-        <div class="hero-bg">
-            <img src="cover.jpg" alt="Cover">
-            <div class="overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.3);"></div>
-        </div>
-        <div class="hero-content">
+        <div class="hero-bg"><img src="cover.jpg" alt="Cover"></div>
+        <div style="z-index: 10;">
             <h1 class="main-title">ΔIf</h1>
             <div class="hero-questions content-en visible">
-                <span>What if it were missing?</span>
-                <span>What if it were excessive?</span>
+                What if it were missing? <br> What if it were excessive?
             </div>
             <div class="hero-questions content-tr">
-                <span>Ya hiç olmasaydı?</span>
-                <span>Ya aşırı olsaydı?</span>
+                Ya hiç olmasaydı? <br> Ya aşırı olsaydı?
             </div>
         </div>
     </header>
 
     <main class="page-container">
-        
-        <section class="about-section reveal" style="text-align:center; margin-bottom:100px;">
-            <div class="chaos-effect">
-                <h2 data-lang="en" style="font-family:'Playfair Display'; margin-bottom:20px;">About the Archive</h2>
-                <h2 data-lang="tr" style="font-family:'Playfair Display'; margin-bottom:20px;">Arşiv Hakkında</h2>
-                <div data-lang="en">
-                    <p>ΔIf is a curated collection of counterfactual thoughts exploring the delicate balance between what exists and what could have been.</p>
-                </div>
-                <div data-lang="tr">
-                    <p>ΔIf, var olan ile olabilecek olan arasındaki hassas dengeyi araştıran karşı-olgusal düşünceler seçkisidir.</p>
-                </div>
+
+        <section class="writers-desk reveal">
+            <div class="desk-icon" onclick="startTypewriter()" title="Open Notebook">
+                📓
+            </div>
+            
+            <div class="typewriter-area" id="manifesto-area">
+                <span id="manifesto-text"></span><span class="cursor-blink">|</span>
             </div>
         </section>
 
@@ -78,233 +72,204 @@
             
             <article class="essay-item reveal">
                 <span class="essay-meta">Issue 01</span>
-                <div class="chaos-effect">
-                    <h2 data-lang="en">Assumption of Absence</h2>
-                    <h2 data-lang="tr">Yokluk Varsayımı</h2>
-                    
-                    <div class="essay-body" data-lang="en">
-                        What if <span class="shift-word" data-alt="noise">silence</span> was the only language we had left? Meaning would drift from <span class="shift-word" data-alt="screams">sounds</span> to gestures, and finally, to the space between us. 
-                        The real message is hidden <span class="hidden-ink">in what we do not say</span>.
-                    </div>
-                    
-                    <div class="essay-body" data-lang="tr">
-                        Ya elimizde kalan tek dil <span class="shift-word" data-alt="gürültü">sessizlik</span> olsaydı? Anlam, <span class="shift-word" data-alt="çığlıklardan">seslerden</span> jestlere, ve sonunda aramızdaki <span class="shift-word" data-alt="kalabalığa">boşluğa</span> sürüklenirdi. 
-                        Asıl mesaj <span class="hidden-ink">söylemediklerimizde gizlidir</span>.
-                    </div>
+                <h2 class="content-en">Assumption of Absence</h2>
+                <h2 class="content-tr">Yokluk Varsayımı</h2>
+                
+                <div class="essay-body content-en physics-enabled">
+                    What if <span class="hidden-ink">silence</span> was the only language we had left? Meaning would drift from sounds to gestures, and finally, to the space between us. The real message is hidden in what we do not say.
+                </div>
+                
+                <div class="essay-body content-tr physics-enabled">
+                    Ya elimizde kalan tek dil <span class="hidden-ink">sessizlik</span> olsaydı? Anlam, seslerden jestlere, ve sonunda aramızdaki boşluğa sürüklenirdi. Asıl mesaj söylemediklerimizde gizlidir.
+                </div>
+                
+                <div class="essay-body content-tr reality-alt" style="display:none; color:var(--highlight);">
+                    Ya elimizde kalan tek şey <span class="hidden-ink">gürültü</span> olsaydı? Anlam, çığlıklardan karmaşaya, ve sonunda boğucu bir doluluğa sürüklenirdi. Aşırılık, sessizlikle aynı sonucu verir: İletişimsizlik.
                 </div>
             </article>
 
             <article class="essay-item reveal">
                 <span class="essay-meta">Issue 02</span>
-                <div class="chaos-effect">
-                    <h2 data-lang="en">Assumption of Excess</h2>
-                    <h2 data-lang="tr">Aşırılık Varsayımı</h2>
-                    
-                    <div class="essay-body" data-lang="en">
-                        When every light is <span class="shift-word" data-alt="off">on</span>, the stars vanish. Too much information creates a noise so dense that it functions exactly like <span class="shift-word" data-alt="meaning">silence</span>.
-                    </div>
-                    <div class="essay-body" data-lang="tr">
-                        Bütün ışıklar <span class="shift-word" data-alt="söndüğünde">yandığında</span> yıldızlar kaybolur. Çok fazla bilgi, <span class="shift-word" data-alt="anlamla">sessizlikle</span> aynı işlevi gören yoğun bir gürültü yaratır.
-                    </div>
+                <h2 class="content-en">Assumption of Excess</h2>
+                <h2 class="content-tr">Aşırılık Varsayımı</h2>
+                
+                <div class="essay-body content-tr physics-enabled">
+                    Bütün ışıklar yandığında yıldızlar kaybolur. Çok fazla bilgi, sessizlikle aynı işlevi gören yoğun bir gürültü yaratır.
                 </div>
             </article>
 
         </section>
 
-        <section class="comments-section reveal" style="margin-top:100px; padding-top:50px; border-top:1px solid var(--line-color);">
+        <section class="comments-section reveal">
             <h3 style="text-align:center; font-family:'Playfair Display'; margin-bottom:40px;">Discussion</h3>
             <div class="giscus"></div>
         </section>
 
         <footer>
-            <div style="margin-bottom: 20px; display: flex; justify-content: center;">
-                <a href="https://www.linkedin.com/in/muhammet-enes-karaoglan/" target="_blank" style="color: var(--text-muted); width: 24px;">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </a>
-            </div>
-            <p>© 2026 ΔIf | Muhammet Enes Karaoğlan</p>
+            <div style="margin-bottom: 20px;">Muhammet Enes Karaoğlan</div>
+            <a href="https://www.linkedin.com/in/muhammet-enes-peker-5262a7256/" target="_blank" style="text-decoration:none; color:inherit; font-size:1.5rem;">in</a>
+            <p style="margin-top:20px;">© 2026 ΔIf</p>
         </footer>
 
     </main>
 
     <script>
-        // ==========================================
-        // 1. AUDIO ENGINE (SPATIAL & ECHO)
-        // ==========================================
-        let audioCtx, audioSource, panner, audioElement;
-        let isAudioInit = false;
+        // --- 1. DAKTİLO EFEKTİ (MANIFESTO) ---
+        const manifestoTR = `HAKKINDA — ΔIf\n\nVar olanı açıklamak için yazmıyorum.\nBir koşul değiştiğinde geriye ne kaldığını görmek için yazıyorum.\n\nΔIf, küçük ama kalıcı bir rahatsızlıktan doğdu:\nçoğu anlatı, gerçekliği sanki kaçınılmazmış gibi sunuyor.\nBeni ilgilendiren şey, bu kaçınılmazlık askıya alındığında ortaya çıkan boşluk.\n\nBuradaki her metin bir varsayımla başlar.\nKanıtlanması gereken bir hipotez olarak değil,\ngeçici olarak takılan bir bakış biçimi olarak.\n\nEğer bir şey eksik olsaydı ne olurdu?\nEğer bir şey fazla olsaydı, ne bozulurdu?\nAnlam hangi noktada incelir — ya da çöker?\n\nSonuç aramıyorum.\nSonuçların izini sürüyorum.\n\nBu arşiv kronolojik değil.\nTematik, döngüsel ve bilinçli biçimde eksik.\nMetinler ilerlemez;\nbirbirine uzaktan seslenir.\n\nSeçilmiş bir rumuzla yazıyorum.\nBu, kimliği saklamak için değil,\nyorumu merkezinden çekmek için.\nBurada odakta olan yazar değil, koşuldur.\n\nΔIf cevapların bir toplamı değil.\nKarşı-olgusal bir dikkat alanıdır.\n\nEğer buradaki bir metin seni huzursuz ediyorsa,\nmuhtemelen işini yapmıştır.\n\n— Varsayımı Üstlenen.`;
 
-        function initAudio() {
-            if (isAudioInit) { toggleMusic(); return; }
+        const manifestoEN = `ABOUT — ΔIf\n\nI do not write to explain what exists.\nI write to test what remains when a condition is altered.\n\nΔIf was born from a simple discomfort:\nmost narratives describe reality as if it were inevitable.\nI am interested in what happens when inevitability is suspended.\n\nEach text here begins with an assumption.\nNot as a hypothesis to be proven,\nbut as a lens to be worn temporarily.\n\nWhat if something essential were missing?\nWhat if something familiar became excessive?\nAt what point does meaning thin out — or collapse?\n\nI do not seek conclusions.\nI trace consequences.\n\nThis archive is not chronological.\nIt is thematic, recursive, and deliberately incomplete.\nTexts speak to one another across distance,\nas assumptions echo rather than progress.\n\nI write under a chosen name,\nnot to conceal identity,\nbut to remove it from the center of interpretation.\nThe focus is the condition — not its author.\n\nΔIf is not a collection of answers.\nIt is a space for counterfactual attention.\n\nIf something here unsettles you,\nit has likely done its work.\n\n— The One Who Assumed`;
+
+        let isTyping = false;
+        
+        function startTypewriter() {
+            if (isTyping) return;
+            isTyping = true;
             
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            audioCtx = new AudioContext();
-            audioElement = document.getElementById('bg-music');
-            audioSource = audioCtx.createMediaElementSource(audioElement);
-            panner = audioCtx.createStereoPanner();
-
-            // Bağlantı: Source -> Panner -> Destination
-            audioSource.connect(panner).connect(audioCtx.destination);
+            const area = document.getElementById('manifesto-area');
+            const textSpan = document.getElementById('manifesto-text');
+            area.style.display = 'block';
+            textSpan.innerHTML = ''; // Temizle
             
-            audioElement.play();
-            document.getElementById('music-btn').innerText = "Pause";
-            isAudioInit = true;
-
-            // Mekansal Ses Takibi
-            document.addEventListener('mousemove', (e) => {
-                // Ekranın ortası 0, solu -1, sağı +1
-                const x = (e.clientX / window.innerWidth) * 2 - 1;
-                panner.pan.value = x; 
-            });
-        }
-
-        function toggleMusic() {
-            if (!isAudioInit) return;
-            if (audioElement.paused) {
-                audioElement.play();
-                document.getElementById('music-btn').innerText = "Pause";
-            } else {
-                audioElement.pause();
-                document.getElementById('music-btn').innerText = "Sound";
-            }
-        }
-
-        // ==========================================
-        // 2. LIVING VOID (CANVAS PARTICLE SYSTEM)
-        // ==========================================
-        const canvas = document.getElementById('neural-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.directionX = (Math.random() * 0.2) - 0.1;
-                this.directionY = (Math.random() * 0.2) - 0.1;
-                this.size = Math.random() * 2;
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX;
-                this.y += this.directionY;
-                
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = document.body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.1)';
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 20000;
-            for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle());
-        }
-
-        function animateParticles() {
-            requestAnimationFrame(animateParticles);
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            // Hangi dil aktif?
+            const isTR = document.body.classList.contains('lang-tr');
+            const textToType = isTR ? manifestoTR : manifestoEN;
             
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            connectParticles();
-        }
-
-        function connectParticles() {
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width/7) * (canvas.height/7)) {
-                        let opacityValue = 1 - (distance / 20000);
-                        let color = document.body.classList.contains('dark-mode') ? '255,255,255' : '0,0,0';
-                        ctx.strokeStyle = 'rgba(' + color + ',' + opacityValue * 0.1 + ')'; // Çok silik çizgiler
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
+            let i = 0;
+            function type() {
+                if (i < textToType.length) {
+                    if (textToType.charAt(i) === '\n') {
+                        textSpan.innerHTML += '<br>';
+                    } else {
+                        textSpan.innerHTML += textToType.charAt(i);
                     }
-                }
-            }
-        }
-        
-        initParticles();
-        animateParticles();
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
-
-        // ==========================================
-        // 3. UI CONTROLS & ENTROPY
-        // ==========================================
-        
-        // Entropi Slider
-        const entropySlider = document.getElementById('entropy-slider');
-        entropySlider.addEventListener('input', (e) => {
-            document.body.style.setProperty('--entropy', e.target.value);
-        });
-
-        // Reality Switch (Yankı Odası Efekti Dahil)
-        function toggleReality() {
-            document.body.classList.toggle('reality-shifted');
-            
-            // Kelime Değişimi
-            document.querySelectorAll('.shift-word').forEach(word => {
-                const currentText = word.innerText;
-                const altText = word.getAttribute('data-alt');
-                word.innerText = altText;
-                word.setAttribute('data-alt', currentText);
-            });
-
-            // Ses Efekti (Detune)
-            if (isAudioInit && audioElement) {
-                if (document.body.classList.contains('reality-shifted')) {
-                    audioElement.playbackRate = 0.8; // Sesi yavaşlat ve kalınlaştır (korkutucu etki)
+                    i++;
+                    setTimeout(type, 30); // Yazma hızı
                 } else {
-                    audioElement.playbackRate = 1.0; // Normale dön
+                    isTyping = false;
                 }
+            }
+            type();
+        }
+
+        // --- 2. ENTROPİ FİZİK MOTORU (KELİME UÇURMA) ---
+        const slider = document.getElementById('entropy-slider');
+        let words = [];
+        
+        // Sayfa yüklenince kelimeleri span içine al
+        function splitWords() {
+            document.querySelectorAll('.physics-enabled').forEach(el => {
+                // HTML yapısını bozmamak için sadece text node'ları işle
+                // (Basitlik için burada innerHTML replace yapıyoruz ama dikkatli olunmalı)
+                const text = el.innerText; 
+                // Kelimelere ayır ve span ile sarmala
+                const splitText = text.split(' ').map(word => `<span class="kinetic-word">${word} </span>`).join('');
+                el.innerHTML = splitText;
+            });
+            
+            // Spanları listeye al ve başlangıç pozisyonlarını kaydet
+            setTimeout(() => {
+                document.querySelectorAll('.kinetic-word').forEach(span => {
+                    words.push({
+                        element: span,
+                        x: 0,
+                        y: 0,
+                        vx: (Math.random() - 0.5) * 5, // Rastgele hız
+                        vy: (Math.random() - 0.5) * 5
+                    });
+                });
+            }, 500);
+        }
+        
+        window.addEventListener('load', splitWords);
+
+        // Animasyon Döngüsü
+        function animateEntropy() {
+            const entropy = slider.value; // 0 ile 100 arası
+            
+            if (entropy > 0) {
+                words.forEach(word => {
+                    // Entropi arttıkça hareket serbestliği artar
+                    const movementScale = entropy / 10; 
+                    
+                    word.x += word.vx * (entropy / 50); 
+                    word.y += word.vy * (entropy / 50);
+
+                    // Sınır kontrolü (Basitçe geri dönme)
+                    if (Math.abs(word.x) > 50 * movementScale) word.vx *= -1;
+                    if (Math.abs(word.y) > 50 * movementScale) word.vy *= -1;
+
+                    word.element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.x}deg)`;
+                });
+            } else {
+                // Entropi 0 ise her şeyi sıfırla
+                words.forEach(word => {
+                    word.x = 0; word.y = 0;
+                    word.element.style.transform = `translate(0,0)`;
+                });
+            }
+            requestAnimationFrame(animateEntropy);
+        }
+        animateEntropy();
+
+        // --- 3. REALITY SWITCH (PARAGRAF DEĞİŞİMİ) ---
+        function toggleReality() {
+            const isChecked = document.getElementById('reality-toggle').checked;
+            // Check edilirse (Sağ taraf) -> Absence (Varsayılan)
+            // Check edilmezse (Sol taraf) -> Excess (Alternatif)
+            
+            // Not: Kullanıcı "Sağa switch ederse Yokluk" dedi. 
+            // Checkbox mantığı: Checked = True.
+            
+            // Burada basit bir display toggle yapacağız
+            const normalTexts = document.querySelectorAll('.essay-body:not(.reality-alt)');
+            const altTexts = document.querySelectorAll('.reality-alt');
+            
+            if (isChecked) {
+                // YOKLUK MODU (Varsayılanı Göster)
+                normalTexts.forEach(el => el.style.display = 'block');
+                altTexts.forEach(el => el.style.display = 'none');
+                document.body.style.filter = "none";
+            } else {
+                // AŞIRILIK MODU (Alternatifi Göster)
+                normalTexts.forEach(el => el.style.display = 'none');
+                altTexts.forEach(el => el.style.display = 'block');
+                // Hafif bir görsel bozulma (Glitch) ekle
+                document.body.style.filter = "contrast(1.2) saturate(1.2)";
             }
         }
 
-        // Dil Kontrolü
+        // --- TEMEL FONKSİYONLAR ---
         function setLang(lang) {
             document.body.className = document.body.className.replace(/lang-\w+/, '');
             document.body.classList.add('lang-' + lang);
-            const iframe = document.querySelector('iframe.giscus-frame');
-            if (iframe) iframe.contentWindow.postMessage({ giscus: { setConfig: { lang: lang } } }, 'https://giscus.app');
+            // Daktilo metni açıksa kapat ki dil değişince karışmasın
+            document.getElementById('manifesto-area').style.display = 'none';
+            isTyping = false;
         }
 
-        // Tema & Zen
-        function toggleTheme() { 
-            document.body.classList.toggle('dark-mode'); 
-            const iframe = document.querySelector('iframe.giscus-frame');
-            const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-            if (iframe) iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
-        }
+        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
         function toggleZen() { document.body.classList.toggle('zen-active'); }
+        
+        const audio = document.getElementById('bg-music');
+        function toggleMusic() {
+            audio.paused ? (audio.play(), document.getElementById('music-btn').innerText = "Pause") : (audio.pause(), document.getElementById('music-btn').innerText = "Sound");
+        }
 
-        // İmleç
+        // Reveal & Cursor
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
-        document.querySelectorAll('a, button, .shift-word, .hidden-ink, input').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-        });
-
-        // Reveal
-        function reveal() {
+        window.addEventListener("scroll", () => {
             document.querySelectorAll(".reveal").forEach(el => {
                 if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
             });
-        }
-        window.addEventListener("scroll", reveal);
-        window.onload = reveal;
+        });
+        
+        // Tab Başlığı Değişimi
+        document.addEventListener("visibilitychange", () => {
+            document.title = document.hidden ? "Missing..." : "ΔIf — Muhammet Enes Karaoğlan";
+        });
     </script>
-<script src="https://giscus.app/client.js"
+    <script src="https://giscus.app/client.js"
         data-repo="MUHAMMET-ENES/delta_if"
         data-repo-id="R_kgDORD6-vQ"
         data-category="General"
