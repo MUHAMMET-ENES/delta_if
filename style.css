@@ -281,3 +281,23 @@ footer {
     .page-container { padding: 60px 24px; }
     .archive-item { grid-template-columns: 1fr; gap: 15px; }
 }
+/* ================= PROGRESS BAR ================= */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #111; /* Siyah ince bir çizgi */
+    z-index: 9999;
+    transition: width 0.1s ease;
+}
+
+/* ================= PRINT STYLES (YAZICI AYARLARI) ================= */
+@media print {
+    body { background: white !important; color: black !important; }
+    .hero-section, .lang-switch, .scroll-indicator, footer, #progress-bar { display: none !important; }
+    .page-container { padding: 0 !important; margin: 0 !important; width: 100% !important; }
+    .essay-item h2 { border-bottom: 2px solid black !important; }
+    .drop-cap::first-letter { color: black !important; }
+}
