@@ -7,7 +7,11 @@
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
     --cursor-color: #fff;
-    --highlight: #d4a373; /* Değişen kelimeler için renk */
+    --highlight: #d4a373;
+    
+    /* Sis Rengi (Açık Tema) */
+    --fog-color: rgba(248, 248, 246, 1); 
+    --fog-transparent: rgba(248, 248, 246, 0);
 }
 
 body.dark-mode {
@@ -17,6 +21,10 @@ body.dark-mode {
     --line-color: #333;
     --cursor-color: #fff;
     --highlight: #f4a261;
+    
+    /* Sis Rengi (Koyu Tema) */
+    --fog-color: rgba(5, 5, 5, 1);
+    --fog-transparent: rgba(5, 5, 5, 0);
 }
 
 /* ================= TEMEL AYARLAR ================= */
@@ -29,13 +37,85 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
+    
+    /* Entropi Değişkeni (JS ile kontrol edilecek) */
+    --entropy: 0; 
 }
 
-/* Değişen Kelimeler (Reality Shift) */
+/* ================= 1. CANLI BOŞLUK (LIVING VOID) ================= */
+#neural-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; opacity: 0.5;
+}
+
+/* ================= 3. DİNAMİK SİS (THE FOG) ================= */
+.the-fog {
+    position: fixed; bottom: 0; left: 0; width: 100%; height: 150px;
+    background: linear-gradient(to top, var(--fog-color), var(--fog-transparent));
+    z-index: 50; pointer-events: none;
+    transition: background 0.5s ease;
+}
+
+/* ================= 4. ENTROPİ KAYDIRICISI (SLIDER) ================= */
+.entropy-container {
+    position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
+    height: 300px; display: flex; flex-direction: column; align-items: center; gap: 10px;
+    z-index: 9000; opacity: 0.3; transition: opacity 0.3s;
+}
+.entropy-container:hover { opacity: 1; }
+
+/* Dikey Slider Ayarları */
+input[type=range][orient=vertical] {
+    writing-mode: bt-lr; /* IE/Edge */
+    -webkit-appearance: slider-vertical; /* Webkit */
+    width: 8px; height: 200px;
+    padding: 0 5px;
+    background: transparent;
+    cursor: none;
+}
+.entropy-label {
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.2em; text-transform: uppercase;
+}
+
+/* ENTROPİ ETKİSİ (Metinlere Uygulanacak) */
+.chaos-effect {
+    display: inline-block;
+    transition: transform 0.1s linear;
+    /* JS'den gelen --entropy değerine göre yamulma/dönme */
+    transform: 
+        rotate(calc(var(--entropy) * 1deg)) 
+        skew(calc(var(--entropy) * 0.5deg))
+        translateX(calc(var(--entropy) * 0.5px));
+    filter: blur(calc(var(--entropy) * 0.02px));
+}
+
+/* ================= 7. SATIR ARASI (INVISIBLE INK) ================= */
+.hidden-ink {
+    color: transparent;
+    background-color: rgba(128, 128, 128, 0.1); /* Hafif iz */
+    border-radius: 4px;
+    padding: 0 4px;
+    transition: all 0.5s ease;
+    cursor: none;
+    position: relative;
+}
+/* Üzerine gelince veya Zen modunda görünür olsun */
+.hidden-ink:hover, body.hovering .hidden-ink {
+    color: var(--highlight);
+    background-color: transparent;
+}
+.hidden-ink::before {
+    content: '[ ]'; /* Gizli olduğunu belli eden işaret */
+    position: absolute; left: 0; top: 0; width: 100%; text-align: center;
+    color: var(--text-muted); opacity: 0.5; pointer-events: none;
+}
+.hidden-ink:hover::before { opacity: 0; }
+
+/* ================= GERÇEKLİK KAYMASI (REALITY SHIFT) ================= */
 .shift-word {
     border-bottom: 1px dashed var(--text-muted);
     transition: all 0.3s ease;
-    cursor: none; /* Özel imleç kullanıyoruz */
 }
 body.reality-shifted .shift-word {
     color: var(--highlight);
@@ -46,102 +126,50 @@ body.reality-shifted .shift-word {
 /* ================= ÖZEL İMLEÇ ================= */
 #custom-cursor {
     position: fixed; top: 0; left: 0;
-    font-family: 'Times New Roman', serif;
-    font-size: 24px; color: var(--cursor-color);
-    mix-blend-mode: difference;
-    transform: translate(-50%, -50%);
-    pointer-events: none; z-index: 10000;
-    transition: transform 0.1s;
+    font-family: 'Times New Roman', serif; font-size: 24px; color: var(--cursor-color);
+    mix-blend-mode: difference; transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 10000; transition: transform 0.1s;
 }
 body.hovering #custom-cursor { transform: translate(-50%, -50%) scale(1.5); font-weight: bold; }
 
-/* ================= DİL GÖRÜNÜRLÜĞÜ ================= */
-[data-lang="en"], [data-lang="tr"] { display: none; }
-body.lang-en [data-lang="en"] { display: block; animation: fadeIn 0.6s ease; }
-body.lang-tr [data-lang="tr"] { display: block; animation: fadeIn 0.6s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-/* ================= ÜST MENÜ & İSİM ================= */
+/* ================= MENÜ & HEADER ================= */
 .top-bar {
-    position: fixed; top: 0; left: 0; width: 100%;
-    padding: 20px 40px;
-    display: flex; justify-content: space-between; align-items: center;
-    z-index: 9999;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-    pointer-events: none; /* Arkadaki görsele tıklanabilsin */
+    position: fixed; top: 0; left: 0; width: 100%; padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center; z-index: 9999;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); pointer-events: none;
 }
-
-.brand-name {
-    font-family: var(--font-heading);
-    color: #fff;
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
-    pointer-events: auto;
-    text-transform: uppercase;
-}
-
-.nav-tools {
-    pointer-events: auto;
-    display: flex; gap: 10px;
-}
-
+.brand-name { font-family: var(--font-heading); color: #fff; font-size: 1.1rem; pointer-events: auto; text-transform: uppercase; }
+.nav-tools { pointer-events: auto; display: flex; gap: 10px; }
 .tool-btn {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: #fff; padding: 6px 12px;
-    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-    cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s;
-    border-radius: 4px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; padding: 6px 12px; font-size: 0.7rem; text-transform: uppercase; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s; border-radius: 4px;
 }
 .tool-btn:hover { background: #fff; color: #000; }
-
-/* Reality Toggle Butonu (Özel) */
-#reality-btn {
-    border-color: var(--highlight);
-    color: var(--highlight);
-}
-#reality-btn:hover {
-    background: var(--highlight);
-    color: #000;
-}
+#reality-btn { border-color: var(--highlight); color: var(--highlight); }
 
 /* ================= HERO SECTION ================= */
 .hero-section {
-    position: relative; width: 100%; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; background-color: #000; color: #fff;
-    overflow: hidden;
+    position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; background-color: #000; color: #fff; overflow: hidden;
 }
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
-
 .hero-content { position: relative; z-index: 10; padding: 0 20px; }
-.main-title {
-    font-family: var(--font-heading);
-    font-size: clamp(5rem, 15vw, 9rem);
-    line-height: 1; margin-bottom: 1.5rem; letter-spacing: -0.05em;
-}
-
-/* Hero Questions (Yeni İstek) */
-.hero-questions {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-style: italic;
-    opacity: 0.9;
-    animation: fadeUp 1.5s ease forwards;
-}
+.main-title { font-family: var(--font-heading); font-size: clamp(5rem, 15vw, 9rem); line-height: 1; margin-bottom: 1.5rem; letter-spacing: -0.05em; }
+.hero-questions { font-family: var(--font-heading); font-size: 1.5rem; font-style: italic; opacity: 0.9; animation: fadeUp 1.5s ease forwards; }
 .hero-questions span { display: block; margin-bottom: 10px; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ================= İÇERİK ================= */
-.page-container { max-width: 900px; margin: 0 auto; padding: 120px 40px; }
-
-.essay-item { margin-bottom: 120px; }
+.page-container { max-width: 900px; margin: 0 auto; padding: 120px 40px; padding-bottom: 200px; /* Sis için yer */ }
+.essay-item { margin-bottom: 150px; }
 .essay-meta { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 15px; border-left: 1px solid var(--text-main); padding-left: 15px; }
 .essay-item h2 { font-family: var(--font-heading); font-size: 2.8rem; margin-bottom: 25px; line-height: 1.1; }
 .essay-body { font-size: 1.2rem; line-height: 1.8; color: var(--text-main); }
 
-/* ZEN MODE */
-body.zen-active .top-bar, body.zen-active .hero-section, body.zen-active footer { display: none !important; }
+/* ================= FOOTER & ZEN ================= */
+footer { text-align: center; padding: 50px 0; border-top: 1px solid var(--line-color); color: var(--text-muted); font-size: 0.8rem; margin-bottom: 50px; }
+body.zen-active .top-bar, body.zen-active .hero-section, body.zen-active footer, body.zen-active .entropy-container { display: none !important; }
 body.zen-active .page-container { padding-top: 50px; }
 #zen-exit {
     position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
@@ -154,13 +182,15 @@ body.zen-active #zen-exit { display: flex; }
 .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* FOOTER */
-footer { text-align: center; padding: 80px 0; border-top: 1px solid var(--line-color); color: var(--text-muted); font-size: 0.8rem; }
+/* DİL GÖRÜNÜRLÜĞÜ */
+[data-lang="en"], [data-lang="tr"] { display: none; }
+body.lang-en [data-lang="en"] { display: block; animation: fadeIn 0.6s ease; }
+body.lang-tr [data-lang="tr"] { display: block; animation: fadeIn 0.6s ease; }
 
 /* MOBİL */
 @media (max-width: 768px) {
     * { cursor: auto !important; }
-    #custom-cursor { display: none; }
-    .top-bar { flex-direction: column; gap: 15px; align-items: center; background: rgba(0,0,0,0.6); }
+    #custom-cursor, .entropy-container, #neural-canvas { display: none; } /* Ağır efektleri mobilde kapat */
+    .top-bar { flex-direction: column; gap: 15px; background: rgba(0,0,0,0.8); }
     .hero-content h1 { font-size: 4rem; }
 }
