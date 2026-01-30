@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ΔIf — Muhammet Enes Karaoğlan</title>
     
+    <meta name="description" content="ΔIf: A counterfactual archive by Muhammet Enes Karaoğlan.">
+    <meta property="og:title" content="ΔIf — The One Who Assumed">
+    <meta property="og:image" content="cover.jpg">
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
@@ -19,6 +24,8 @@
         <source src="ambient.mp3" type="audio/mpeg">
     </audio>
 
+    <div id="progress-bar"></div>
+
     <nav class="top-nav">
         <button class="tool-btn" onclick="toggleMusic()" id="music-btn">Sound On</button>
         <button class="tool-btn" onclick="toggleTheme()">Theme</button>
@@ -28,13 +35,16 @@
 
     <header class="hero-section">
         <div class="hero-bg">
-            <img src="cover.jpg" alt="Cover Art">
-        </div>
+            <img src="cover.jpg" alt="Editorial Cover">
+            <div class="overlay"></div> </div>
+
         <div class="hero-content">
-            <h1>ΔIf</h1>
+            <h1 class="main-title">ΔIf</h1>
             <p class="subtitle" data-lang="en">Muhammet Enes Karaoğlan</p>
             <p class="subtitle" data-lang="tr">Muhammet Enes Karaoğlan</p>
         </div>
+
+        <div class="scroll-indicator">↓</div>
     </header>
 
     <main class="page-container">
@@ -42,19 +52,22 @@
         <section class="about-section reveal">
             <h2 data-lang="en">About the Archive</h2>
             <h2 data-lang="tr">Arşiv Hakkında</h2>
+            
             <div data-lang="en">
-                <p>ΔIf is a curated collection of counterfactual thoughts exploring the delicate balance between what exists and what could have been. Produced by Muhammet Enes Karaoğlan.</p>
+                <p>ΔIf is a curated collection of counterfactual thoughts exploring the delicate balance between what exists and what could have been.</p>
             </div>
             <div data-lang="tr">
-                <p>ΔIf, var olan ile olabilecek olan arasındaki hassas dengeyi araştıran karşı-olgusal düşünceler seçkisidir. Muhammet Enes Karaoğlan tarafından hazırlanmıştır.</p>
+                <p>ΔIf, var olan ile olabilecek olan arasındaki hassas dengeyi araştıran karşı-olgusal düşünceler seçkisidir. </p>
             </div>
         </section>
 
         <section class="essays-grid">
+            
             <article class="essay-item reveal">
                 <span class="essay-meta">Issue 01: Absence</span>
                 <h2 data-lang="en">Assumption of Absence</h2>
                 <h2 data-lang="tr">Yokluk Varsayımı</h2>
+                
                 <div class="essay-body" data-lang="en">
                     What if silence was the only language we had left? Meaning would drift from sounds to gestures, and finally, to the space between us.
                 </div>
@@ -67,6 +80,7 @@
                 <span class="essay-meta">Issue 02: Excess</span>
                 <h2 data-lang="en">Assumption of Excess</h2>
                 <h2 data-lang="tr">Aşırılık Varsayımı</h2>
+                
                 <div class="essay-body" data-lang="en">
                     When every light is on, the stars vanish. Too much information creates a noise so dense that it functions exactly like silence.
                 </div>
@@ -74,53 +88,53 @@
                     Bütün ışıklar yandığında yıldızlar kaybolur. Çok fazla bilgi, sessizlikle aynı işlevi gören yoğun bir gürültü yaratır.
                 </div>
             </article>
+
         </section>
 
         <section class="lab-section reveal">
             <h2 class="lab-header">The Lab</h2>
             <div class="lab-grid">
                 <div class="lab-card">
-                    <span class="lab-tag">C++ / Algorithms</span>
-                    <h3 data-lang="en">Memory Leak as a Metaphor</h3>
-                    <h3 data-lang="tr">Metafor Olarak Bellek Sızıntısı</h3>
-                    <p data-lang="en" style="margin-top:10px; font-size:0.9rem;">What happens when we forget to free our past? A technical look at system crashes caused by emotional pointers.</p>
-                    <p data-lang="tr" style="margin-top:10px; font-size:0.9rem;">Geçmişi serbest bırakmayı unuttuğumuzda ne olur? Duygusal işaretçilerin neden olduğu sistem çökmelerine teknik bir bakış.</p>
+                    <span class="lab-tag">Fragment 01</span>
+                    <h3 data-lang="en">The Unobserved Room</h3>
+                    <h3 data-lang="tr">Gözlemlenmeyen Oda</h3>
+                    <p data-lang="en" class="lab-desc">Does the room still have geometry when no one is perceiving it? A study on digital permanence.</p>
+                    <p data-lang="tr" class="lab-desc">Kimse algılamadığında odanın geometrisi devam eder mi? Dijital kalıcılık üzerine bir çalışma.</p>
                 </div>
                 <div class="lab-card">
-                    <span class="lab-tag">Unreal Engine / Design</span>
-                    <h3 data-lang="en">Physics of a Ghost</h3>
-                    <h3 data-lang="tr">Bir Hayaletin Fiziği</h3>
-                    <p data-lang="en" style="margin-top:10px; font-size:0.9rem;">Disabling collision on a player character creates the ultimate observer. A study in game mechanics.</p>
-                    <p data-lang="tr" style="margin-top:10px; font-size:0.9rem;">Oyuncu karakterinde çarpışmayı (collision) devre dışı bırakmak, nihai gözlemciyi yaratır. Bir oyun mekaniği çalışması.</p>
+                    <span class="lab-tag">Fragment 02</span>
+                    <h3 data-lang="en">Recursive Memory</h3>
+                    <h3 data-lang="tr">Özyineli Hafıza</h3>
+                    <p data-lang="en" class="lab-desc">Memories that reference themselves until they lose the original event.</p>
+                    <p data-lang="tr" class="lab-desc">Orijinal olayı kaybedene kadar kendine referans veren anılar.</p>
                 </div>
             </div>
         </section>
 
         <section class="comments-section reveal">
-            <h3 style="text-align:center; margin-bottom:40px; font-family:'Playfair Display'">Discussion / Tartışma</h3>
-            <div class="giscus"></div>
-        </section>
+            <h3 class="comments-title" data-lang="en">Discussion</h3>
+            <h3 class="comments-title" data-lang="tr">Tartışma</h3>
+            
+            <div class="giscus"></div> 
+            </section>
 
         <footer class="reveal">
-            <p data-lang="en">© 2026 ΔIf | Muhammet Enes Karaoğlan</p>
-            <p data-lang="tr">© 2026 ΔIf | Muhammet Enes Karaoğlan</p>
+            <p>© 2026 ΔIf | Muhammet Enes Karaoğlan</p>
         </footer>
 
     </main>
 
     <script>
-        // 1. DİL KONTROLÜ (Bug Fix)
+        // 1. DİL KONTROLÜ
         function setLang(lang) {
             document.body.className = document.body.className.replace(/lang-\w+/, '');
             document.body.classList.add('lang-' + lang);
-            // Giscus dilini de güncelle
             updateGiscusLang(lang);
         }
 
         // 2. TEMA KONTROLÜ
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
-            // Giscus temasını da güncelle
             updateGiscusTheme();
         }
 
@@ -138,40 +152,46 @@
 
         // 4. ÖZEL İMLEÇ (DELTA)
         const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => {
+        document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
-        // Linklerin üzerine gelince büyüme efekti
+        
+        // Hover Efekti (Linklere gelince)
         document.querySelectorAll('a, button, .lab-card').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
 
-        // 5. REVEAL EFEKTİ
+        // 5. REVEAL (KAYDIRMA) EFEKTİ
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
             reveals.forEach(el => {
-                if(el.getBoundingClientRect().top < window.innerHeight - 100) {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
                     el.classList.add("active");
                 }
             });
         }
-        window.addEventListener("scroll", reveal);
+        window.addEventListener("scroll", () => {
+            reveal();
+            // Okuma Çubuğu
+            let scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        });
         window.onload = reveal;
 
-        // 6. GISCUS AYARLARI (GÜNCELLE)
+        // 6. GISCUS AYAR GÜNCELLEME
         function updateGiscusTheme() {
             const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
             const iframe = document.querySelector('iframe.giscus-frame');
-            if (!iframe) return;
-            iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+            if (iframe) iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
         }
-
         function updateGiscusLang(lang) {
             const iframe = document.querySelector('iframe.giscus-frame');
-            if (!iframe) return;
-            iframe.contentWindow.postMessage({ giscus: { setConfig: { lang: lang } } }, 'https://giscus.app');
+            if (iframe) iframe.contentWindow.postMessage({ giscus: { setConfig: { lang: lang } } }, 'https://giscus.app');
         }
     </script>
 
@@ -190,6 +210,6 @@
         crossorigin="anonymous"
         async>
 </script>
-    
-    </body>
+
+</body>
 </html>
