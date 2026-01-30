@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ΔIf — Muhammet Enes Karaoğlan</title>
+    <meta name="description" content="A counterfactual archive.">
     
-    <meta name="description" content="ΔIf: A counterfactual archive by Muhammet Enes Karaoğlan.">
-    <meta property="og:title" content="ΔIf — The One Who Assumed">
-    <meta property="og:image" content="cover.jpg">
-
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
@@ -18,7 +14,7 @@
 
 <body class="lang-tr">
 
-    <div id="custom-cursor"></div>
+    <div id="custom-cursor">Δ</div>
 
     <audio id="bg-music" loop>
         <source src="ambient.mp3" type="audio/mpeg">
@@ -27,23 +23,26 @@
     <div id="progress-bar"></div>
 
     <nav class="top-nav">
-        <button class="tool-btn" onclick="toggleMusic()" id="music-btn">Sound On</button>
+        <button class="tool-btn zen-btn" onclick="toggleZen()" title="Zen Mode">👁</button>
+        
+        <button class="tool-btn" onclick="toggleMusic()" id="music-btn">Sound</button>
         <button class="tool-btn" onclick="toggleTheme()">Theme</button>
         <button class="tool-btn" onclick="setLang('en')">EN</button>
         <button class="tool-btn" onclick="setLang('tr')">TR</button>
     </nav>
 
+    <button id="zen-exit" onclick="toggleZen()">✕</button>
+
     <header class="hero-section">
         <div class="hero-bg">
-            <img src="cover.jpg" alt="Editorial Cover">
-            <div class="overlay"></div> </div>
-
+            <img src="cover.jpg" alt="Cover">
+            <div class="overlay"></div>
+        </div>
         <div class="hero-content">
             <h1 class="main-title">ΔIf</h1>
             <p class="subtitle" data-lang="en">Muhammet Enes Karaoğlan</p>
             <p class="subtitle" data-lang="tr">Muhammet Enes Karaoğlan</p>
         </div>
-
         <div class="scroll-indicator">↓</div>
     </header>
 
@@ -52,110 +51,73 @@
         <section class="about-section reveal">
             <h2 data-lang="en">About the Archive</h2>
             <h2 data-lang="tr">Arşiv Hakkında</h2>
-            
             <div data-lang="en">
                 <p>ΔIf is a curated collection of counterfactual thoughts exploring the delicate balance between what exists and what could have been.</p>
             </div>
             <div data-lang="tr">
-                <p>ΔIf, var olan ile olabilecek olan arasındaki hassas dengeyi araştıran karşı-olgusal düşünceler seçkisidir. </p>
+                <p>ΔIf, var olan ile olabilecek olan arasındaki hassas dengeyi araştıran karşı-olgusal düşünceler seçkisidir. Yokluğun mantığı üzerine bir soruşturmadır.</p>
             </div>
         </section>
 
-        <section class="essays-grid">
-            
-            <article class="essay-item reveal">
-                <span class="essay-meta">Issue 01: Absence</span>
-                <h2 data-lang="en">Assumption of Absence</h2>
-                <h2 data-lang="tr">Yokluk Varsayımı</h2>
-                
-                <div class="essay-body" data-lang="en">
-                    What if silence was the only language we had left? Meaning would drift from sounds to gestures, and finally, to the space between us.
-                </div>
-                <div class="essay-body" data-lang="tr">
-                    Ya elimizde kalan tek dil sessizlik olsaydı? Anlam sesten jestlere, ve sonunda aramızdaki boşluğa sürüklenirdi.
-                </div>
-            </article>
-
-            <article class="essay-item reveal">
-                <span class="essay-meta">Issue 02: Excess</span>
-                <h2 data-lang="en">Assumption of Excess</h2>
-                <h2 data-lang="tr">Aşırılık Varsayımı</h2>
-                
-                <div class="essay-body" data-lang="en">
-                    When every light is on, the stars vanish. Too much information creates a noise so dense that it functions exactly like silence.
-                </div>
-                <div class="essay-body" data-lang="tr">
-                    Bütün ışıklar yandığında yıldızlar kaybolur. Çok fazla bilgi, sessizlikle aynı işlevi gören yoğun bir gürültü yaratır.
-                </div>
-            </article>
-
-        </section>
-
-        <section class="lab-section reveal">
-            <h2 class="lab-header">The Lab</h2>
-            <div class="lab-grid">
-                <div class="lab-card">
-                    <span class="lab-tag">Fragment 01</span>
-                    <h3 data-lang="en">The Unobserved Room</h3>
-                    <h3 data-lang="tr">Gözlemlenmeyen Oda</h3>
-                    <p data-lang="en" class="lab-desc">Does the room still have geometry when no one is perceiving it? A study on digital permanence.</p>
-                    <p data-lang="tr" class="lab-desc">Kimse algılamadığında odanın geometrisi devam eder mi? Dijital kalıcılık üzerine bir çalışma.</p>
-                </div>
-                <div class="lab-card">
-                    <span class="lab-tag">Fragment 02</span>
-                    <h3 data-lang="en">Recursive Memory</h3>
-                    <h3 data-lang="tr">Özyineli Hafıza</h3>
-                    <p data-lang="en" class="lab-desc">Memories that reference themselves until they lose the original event.</p>
-                    <p data-lang="tr" class="lab-desc">Orijinal olayı kaybedene kadar kendine referans veren anılar.</p>
-                </div>
+        <article class="essay-item reveal">
+            <span class="essay-meta">Issue 01: Absence</span>
+            <h2 data-lang="en">Assumption of Absence</h2>
+            <h2 data-lang="tr">Yokluk Varsayımı</h2>
+            <div class="essay-body" data-lang="en">
+                What if silence was the only language we had left? Meaning would drift from sounds to gestures, and finally, to the space between us.
             </div>
-        </section>
+            <div class="essay-body" data-lang="tr">
+                Ya elimizde kalan tek dil sessizlik olsaydı? Anlam sesten jestlere, ve sonunda aramızdaki boşluğa sürüklenirdi.
+            </div>
+        </article>
+
+        <article class="essay-item reveal">
+            <span class="essay-meta">Issue 02: Excess</span>
+            <h2 data-lang="en">Assumption of Excess</h2>
+            <h2 data-lang="tr">Aşırılık Varsayımı</h2>
+            <div class="essay-body" data-lang="en">
+                When every light is on, the stars vanish. Too much information creates a noise so dense that it functions exactly like silence.
+            </div>
+            <div class="essay-body" data-lang="tr">
+                Bütün ışıklar yandığında yıldızlar kaybolur. Çok fazla bilgi, sessizlikle aynı işlevi gören yoğun bir gürültü yaratır.
+            </div>
+        </article>
 
         <section class="comments-section reveal">
-            <h3 class="comments-title" data-lang="en">Discussion</h3>
-            <h3 class="comments-title" data-lang="tr">Tartışma</h3>
-            
-            <div class="giscus"></div> 
-            </section>
+            <h3 style="text-align:center; font-family:'Playfair Display'; margin-bottom:40px;">Discussion</h3>
+            <div class="giscus"></div>
+        </section>
 
-       <footer class="reveal">
-    <div style="margin-bottom: 20px; display: flex; justify-content: center; gap: 20px;">
-        
-        <a href="https://www.linkedin.com/in/muhammet-enes-karaoglan/" target="_blank" aria-label="LinkedIn" style="color: var(--text-muted); transition: 0.3s;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-        </a>
-
-        <a href="https://github.com/muhammet-enes" target="_blank" aria-label="GitHub" style="color: var(--text-muted); transition: 0.3s;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-        </a>
-
-    </div>
-    
-    <p style="margin-bottom: 5px;">© 2026 ΔIf | Muhammet Enes Karaoğlan</p>
-    <p style="font-size: 0.7rem; opacity: 0.5;">Designed with Counterfactual Logic</p>
-</footer>
+        <footer class="reveal">
+            <div style="margin-bottom: 20px; display: flex; justify-content: center; gap: 20px;">
+                <a href="https://www.linkedin.com/in/muhammet-enes-peker-5262a7256/" target="_blank" aria-label="LinkedIn" style="color: var(--text-muted); width: 24px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+            </div>
+            <p>© 2026 ΔIf | Muhammet Enes Karaoğlan</p>
+        </footer>
 
     </main>
 
     <script>
-        // 1. DİL KONTROLÜ
+        // Dil Kontrolü
         function setLang(lang) {
             document.body.className = document.body.className.replace(/lang-\w+/, '');
             document.body.classList.add('lang-' + lang);
             updateGiscusLang(lang);
         }
-
-        // 2. TEMA KONTROLÜ
+        // Tema Kontrolü
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             updateGiscusTheme();
         }
-
-        // 3. MÜZİK KONTROLÜ
+        // Zen Modu (Göz Butonu)
+        function toggleZen() {
+            document.body.classList.toggle('zen-active');
+        }
+        // Müzik Kontrolü
         const audio = document.getElementById('bg-music');
         function toggleMusic() {
             if (audio.paused) {
@@ -163,44 +125,33 @@
                 document.getElementById('music-btn').innerText = "Pause";
             } else {
                 audio.pause();
-                document.getElementById('music-btn').innerText = "Sound On";
+                document.getElementById('music-btn').innerText = "Sound";
             }
         }
-
-        // 4. ÖZEL İMLEÇ (DELTA)
+        // İmleç Takibi
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
-        
-        // Hover Efekti (Linklere gelince)
-        document.querySelectorAll('a, button, .lab-card').forEach(el => {
+        document.querySelectorAll('a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
-
-        // 5. REVEAL (KAYDIRMA) EFEKTİ
+        // Reveal Efekti
         function reveal() {
-            const reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(el => {
-                const windowHeight = window.innerHeight;
-                const elementTop = el.getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add("active");
-                }
+            document.querySelectorAll(".reveal").forEach(el => {
+                if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
             });
         }
         window.addEventListener("scroll", () => {
             reveal();
-            // Okuma Çubuğu
             let scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
         });
         window.onload = reveal;
 
-        // 6. GISCUS AYAR GÜNCELLEME
+        // Giscus Güncelleyiciler
         function updateGiscusTheme() {
             const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
             const iframe = document.querySelector('iframe.giscus-frame');
@@ -212,21 +163,5 @@
         }
     </script>
 
-   <script src="https://giscus.app/client.js"
-        data-repo="MUHAMMET-ENES/delta_if"
-        data-repo-id="R_kgDORD6-vQ"
-        data-category="General"
-        data-category-id="DIC_kwDORD6-vc4C1okw"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="tr"
-        crossorigin="anonymous"
-        async>
-</script>
-
-</body>
+    </body>
 </html>
