@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Assumption Failed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 404 Sayfasına Özel Minimal Stil */
+        .error-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #f8f8f6;
+            padding: 20px;
+        }
+        .error-code {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            opacity: 0.1; /* Çok silik, hayalet gibi */
+        }
+        .error-msg {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .error-desc {
+            font-family: 'Inter', sans-serif;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .home-btn {
+            text-decoration: none;
+            border-bottom: 1px solid #111;
+            color: #111;
+            padding-bottom: 5px;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .home-btn:hover { opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <main class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-msg">This assumption does not exist.</h1>
+        <p class="error-desc">
+            The condition you are looking for has not been defined yet.<br>
+            Or perhaps it was missing from the start.
+        </p>
+        <a href="/delta_if/" class="home-btn">Return to ΔIf</a>
+    </main>
+</body>
+</html>
