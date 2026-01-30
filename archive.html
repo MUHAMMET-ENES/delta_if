@@ -1,57 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive — ΔIf</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
 </head>
-<body class="issue-missing">
 
-    <nav class="archive-nav">
-        <a href="index.html" class="back-link">← ΔIf Home</a>
-    </nav>
+<body class="lang-tr">
 
-    <main class="page-container">
+    <div id="custom-cursor">Δ</div>
+    <audio id="bg-music" loop><source src="ambient.mp3" type="audio/mpeg"></audio>
+
+    <div class="top-header" style="position:fixed; width:100%; top:0; background:var(--bg-color); z-index:99;">
+        <div class="brand-name"><a href="index.html" style="text-decoration:none; color:inherit;">← ΔIf / RETURN</a></div>
         
-        <header class="archive-header">
-            <h1>Archive</h1>
-            <p class="subtitle">Index of Assumptions</p>
-        </header>
+        <div class="nav-row">
+            <button class="tool-btn" onclick="toggleTheme()">Theme</button>
+            <button class="tool-btn" onclick="setLang('en')">EN</button>
+            <button class="tool-btn" onclick="setLang('tr')">TR</button>
+        </div>
+    </div>
 
-        <div class="divider"></div>
+    <main class="page-container" style="max-width:1200px;">
 
-        <section class="archive-list">
+        <div class="archive-header reveal">
+            <h1 class="archive-title">The Archive</h1>
+            <p data-lang="en" style="max-width:500px;">A non-linear log of assumptions, fragments, and errors. Nothing here is final.</p>
+            <p data-lang="tr" style="max-width:500px;">Varsayımların, parçaların ve hataların doğrusal olmayan kaydı. Burada hiçbir şey nihai değildir.</p>
+
+            <div class="archive-filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Essays</button>
+                <button class="filter-btn">Fragments</button>
+                <button class="filter-btn">Glitches</button>
+            </div>
+        </div>
+
+        <div class="archive-list">
             
-            <div class="archive-item">
-                <div class="meta">
-                    <span class="issue-number">Issue 01</span>
-                    <span class="date">Jan 2026</span>
-                </div>
-                <div class="info">
-                    <a href="index.html" class="post-title">Absence & Excess</a>
-                    <p class="post-desc">Defining the boundaries of what is missing.</p>
-                </div>
+            <a href="index.html" class="archive-row reveal">
+                <span class="row-id">LOG_001</span>
+                <span class="row-title" data-lang="en">Assumption of Absence</span>
+                <span class="row-title" data-lang="tr">Yokluk Varsayımı</span>
+                <span class="row-meta">Core Essay</span>
+                <span class="row-arrow">→</span>
+            </a>
+
+            <a href="index.html" class="archive-row reveal">
+                <span class="row-id">LOG_002</span>
+                <span class="row-title" data-lang="en">Assumption of Excess</span>
+                <span class="row-title" data-lang="tr">Aşırılık Varsayımı</span>
+                <span class="row-meta">Core Essay</span>
+                <span class="row-arrow">→</span>
+            </a>
+
+            <div class="archive-row reveal" style="opacity:0.5; cursor:not-allowed;">
+                <span class="row-id">ERR_404</span>
+                <span class="row-title" data-lang="en">The Memory Leak</span>
+                <span class="row-title" data-lang="tr">Bellek Sızıntısı</span>
+                <span class="row-meta">Fragment (Coming Soon)</span>
+                <span class="row-arrow">🔒</span>
             </div>
 
-            <div class="archive-item">
-                <div class="meta">
-                    <span class="issue-number">Issue 00</span>
-                    <span class="date">Dec 2025</span>
-                </div>
-                <div class="info">
-                    <a href="#" class="post-title">Prologue: The First Condition</a>
-                    <p class="post-desc">Why we started assuming things.</p>
-                </div>
-            </div>
+        </div>
 
-        </section>
+        <footer style="border:none; margin-top:50px;">
+            <p>© 2026 ΔIf | Archive Log</p>
+        </footer>
 
     </main>
 
+    <script>
+        // Dil Kontrolü
+        function setLang(lang) {
+            document.body.className = document.body.className.replace(/lang-\w+/, '');
+            document.body.classList.add('lang-' + lang);
+        }
+        // Tema Kontrolü
+        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
+        
+        // İmleç
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // Reveal
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+    </script>
 </body>
 </html>
