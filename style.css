@@ -1,11 +1,21 @@
-/* ================= DEĞİŞKENLER ================= */
+/* ================= DEĞİŞKENLER & TEMA ================= */
 :root {
     --bg-color: #f8f8f6;
     --text-main: #1a1a1a;
     --text-muted: #666;
+    --accent: #000;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
     --line-color: #e5e5e5;
+}
+
+/* KOYU MOD AYARLARI */
+body.dark-mode {
+    --bg-color: #0a0a0a;
+    --text-main: #e0e0e0;
+    --text-muted: #888;
+    --accent: #fff;
+    --line-color: #222;
 }
 
 /* ================= TEMEL AYARLAR ================= */
@@ -17,33 +27,49 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     overflow-x: hidden;
+    transition: background 0.5s ease, color 0.5s ease;
 }
 
-::selection { background: #333; color: #fff; }
-
-/* OKUMA ÇUBUĞU */
-#progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: #000;
-    z-index: 9999;
-    transition: width 0.1s ease;
-}
-
-/* ================= SCROLL REVEAL (BELİRME EFEKTİ) ================= */
+/* REVEAL EFEKTİ (Düzeltildi) */
 .reveal {
     opacity: 0;
-    transform: translateY(40px); /* Aşağıdan gelsin */
-    transition: all 1s ease; /* 1 saniyede yumuşakça belirsin */
+    transform: translateY(30px) scale(0.98);
+    transition: all 1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    visibility: hidden;
 }
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    visibility: visible;
 }
+
+/* ================= NAVİGASYON & ARAÇLAR ================= */
+.top-nav {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 100;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.tool-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.tool-btn:hover { background: #fff; color: #000; }
+
+body.dark-mode .tool-btn { border-color: rgba(255,255,255,0.2); }
 
 /* ================= HERO SECTION ================= */
 .hero-section {
@@ -56,246 +82,56 @@ body {
     text-align: center;
     color: #fff;
     background-color: #000;
-    overflow: hidden;
 }
 
-.hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.hero-bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.75; 
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    padding: 0 20px;
-    animation: fadeUp 1.2s ease forwards;
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
 
 .hero-content h1 {
     font-family: var(--font-heading);
-    font-size: 6rem;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.04em;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: clamp(4rem, 10vw, 7rem);
+    margin-bottom: 1rem;
 }
 
-.subtitle {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    margin-bottom: 2rem;
-    display: block;
-    opacity: 0.9;
-}
-
-.questions {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    line-height: 1.4;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-
-/* ================= NAVİGASYON ================= */
-.lang-switch {
-    position: absolute;
-    top: 40px;
-    right: 40px;
-    font-size: 0.85rem;
-    z-index: 10;
-    color: #fff;
-}
-
-.lang-switch button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: var(--font-body);
-    font-weight: 500;
-    color: #fff;
-    opacity: 0.6;
-    transition: opacity 0.3s;
-    letter-spacing: 0.1em;
-}
-
-.lang-switch button.active { opacity: 1; border-bottom: 1px solid #fff; }
-.lang-switch .separator { margin: 0 8px; opacity: 0.4; }
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    font-size: 1.5rem;
-    z-index: 2;
-    animation: bounce 2s infinite;
-    opacity: 0.7;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-    40% {transform: translateX(-50%) translateY(-10px);}
-    60% {transform: translateX(-50%) translateY(-5px);}
-}
-
-/* ================= İÇERİK ================= */
-.page-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 120px 40px;
-}
-
-.manifesto {
-    max-width: 680px;
-    margin: 0 auto 120px auto;
+/* ================= HAKKINDA BÖLÜMÜ ================= */
+.about-section {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 0 40px;
     text-align: center;
 }
 
-.manifesto p {
+.about-section h2 {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: var(--text-main);
+    margin-bottom: 30px;
+    font-style: italic;
 }
 
-.essays-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    margin-bottom: 150px;
-}
-
-.essay-item h2 {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid #111;
-    display: inline-block;
-    padding-bottom: 8px;
-}
-
-.essay-item p { font-size: 1.05rem; text-align: justify; }
-
-.drop-cap::first-letter {
-    float: left;
-    font-family: var(--font-heading);
-    font-size: 4.5rem;
-    line-height: 0.8;
-    margin-right: 12px;
-    margin-top: 4px;
+/* ================= OKUMA ARAÇLARI ================= */
+.reader-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
 }
 
 /* ================= FOOTER & BÜLTEN ================= */
-.divider {
-    height: 1px;
-    background: var(--line-color);
-    width: 100%;
-    margin: 0 0 80px 0;
-}
-
 footer {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    padding: 80px 40px;
     border-top: 1px solid var(--line-color);
-    padding-top: 60px;
-    padding-bottom: 40px;
-}
-
-/* Bülten Formu Tasarımı */
-.newsletter-form {
-    margin-top: 30px;
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    text-align: center;
 }
 
 .newsletter-input {
-    padding: 10px 0;
     border: none;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid var(--text-muted);
     background: transparent;
-    font-family: var(--font-body);
-    width: 250px;
-    outline: none;
-    font-size: 0.9rem;
     color: var(--text-main);
+    padding: 10px;
+    width: 250px;
+    margin-right: 10px;
 }
 
-.newsletter-input::placeholder { color: #999; font-style: italic; }
-
-.newsletter-btn {
-    padding: 10px 20px;
-    background: #111;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    transition: opacity 0.3s;
-    text-transform: uppercase;
-}
-
-.newsletter-btn:hover { opacity: 0.7; }
-
-.license { margin-top: 10px; font-size: 0.75rem; opacity: 0.7; }
-
-.content-en, .content-tr {
-    display: none;
-    animation: fadeIn 0.5s ease;
-}
-
-.content-en.visible, .content-tr.visible { display: block; }
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-/* ARŞİV */
-.archive-nav { padding: 40px; position: absolute; top: 0; left: 0; }
-.back-link { text-decoration: none; color: var(--text-main); font-size: 0.9rem; opacity: 0.6; }
-.back-link:hover { opacity: 1; }
-.archive-header { margin-top: 80px; text-align: center; }
-.archive-header h1 { font-family: var(--font-heading); font-size: 4rem; }
-.archive-list { max-width: 800px; margin: 0 auto; }
-.archive-item { display: grid; grid-template-columns: 150px 1fr; padding: 40px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-.archive-item:hover { transform: translateX(10px); transition: transform 0.3s ease; }
-.archive-item .post-title { font-family: var(--font-heading); font-size: 2rem; color: var(--text-main); text-decoration: none; }
-.archive-item .meta { font-size: 0.8rem; color: var(--text-muted); }
-
-/* YAZICI AYARLARI */
-@media print {
-    body { background: white !important; color: black !important; }
-    .hero-section, .lang-switch, .scroll-indicator, footer, #progress-bar, .newsletter-form { display: none !important; }
-    .page-container { padding: 0 !important; margin: 0 !important; width: 100% !important; }
-    .essay-item h2 { border-bottom: 2px solid black !important; }
-}
-
-/* MOBİL */
-@media (max-width: 900px) {
-    .hero-content h1 { font-size: 4rem; }
-    .questions { font-size: 1.4rem; }
-    .essays-grid { grid-template-columns: 1fr; gap: 60px; }
-    .page-container { padding: 60px 24px; }
-    .newsletter-form { flex-direction: column; align-items: center; }
-    .newsletter-input { text-align: center; }
-    .archive-item { grid-template-columns: 1fr; gap: 15px; }
+/* MOBİL AYARLARI */
+@media (max-width: 768px) {
+    .top-nav { top: 20px; right: 20px; flex-wrap: wrap; justify-content: flex-end; }
+    .hero-content h1 { font-size: 3.5rem; }
 }
