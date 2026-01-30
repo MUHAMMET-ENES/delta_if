@@ -21,7 +21,7 @@ body {
 
 ::selection { background: #333; color: #fff; }
 
-/* OKUMA ÇUBUĞU (YENİ EKLENDİ) */
+/* OKUMA ÇUBUĞU */
 #progress-bar {
     position: fixed;
     top: 0;
@@ -31,6 +31,18 @@ body {
     background: #000;
     z-index: 9999;
     transition: width 0.1s ease;
+}
+
+/* ================= SCROLL REVEAL (BELİRME EFEKTİ) ================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px); /* Aşağıdan gelsin */
+    transition: all 1s ease; /* 1 saniyede yumuşakça belirsin */
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ================= HERO SECTION ================= */
@@ -191,12 +203,12 @@ body {
     margin-top: 4px;
 }
 
-/* ================= FOOTER & DİĞER ================= */
+/* ================= FOOTER & BÜLTEN ================= */
 .divider {
     height: 1px;
     background: var(--line-color);
     width: 100%;
-    margin: 0 0 100px 0;
+    margin: 0 0 80px 0;
 }
 
 footer {
@@ -207,6 +219,44 @@ footer {
     padding-top: 60px;
     padding-bottom: 40px;
 }
+
+/* Bülten Formu Tasarımı */
+.newsletter-form {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.newsletter-input {
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #999;
+    background: transparent;
+    font-family: var(--font-body);
+    width: 250px;
+    outline: none;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.newsletter-input::placeholder { color: #999; font-style: italic; }
+
+.newsletter-btn {
+    padding: 10px 20px;
+    background: #111;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    transition: opacity 0.3s;
+    text-transform: uppercase;
+}
+
+.newsletter-btn:hover { opacity: 0.7; }
 
 .license { margin-top: 10px; font-size: 0.75rem; opacity: 0.7; }
 
@@ -219,7 +269,7 @@ footer {
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* ================= ARŞİV STILLERİ (EKLENDİ) ================= */
+/* ARŞİV */
 .archive-nav { padding: 40px; position: absolute; top: 0; left: 0; }
 .back-link { text-decoration: none; color: var(--text-main); font-size: 0.9rem; opacity: 0.6; }
 .back-link:hover { opacity: 1; }
@@ -231,10 +281,10 @@ footer {
 .archive-item .post-title { font-family: var(--font-heading); font-size: 2rem; color: var(--text-main); text-decoration: none; }
 .archive-item .meta { font-size: 0.8rem; color: var(--text-muted); }
 
-/* ================= YAZICI AYARLARI (YENİ EKLENDİ) ================= */
+/* YAZICI AYARLARI */
 @media print {
     body { background: white !important; color: black !important; }
-    .hero-section, .lang-switch, .scroll-indicator, footer, #progress-bar { display: none !important; }
+    .hero-section, .lang-switch, .scroll-indicator, footer, #progress-bar, .newsletter-form { display: none !important; }
     .page-container { padding: 0 !important; margin: 0 !important; width: 100% !important; }
     .essay-item h2 { border-bottom: 2px solid black !important; }
 }
@@ -245,5 +295,7 @@ footer {
     .questions { font-size: 1.4rem; }
     .essays-grid { grid-template-columns: 1fr; gap: 60px; }
     .page-container { padding: 60px 24px; }
+    .newsletter-form { flex-direction: column; align-items: center; }
+    .newsletter-input { text-align: center; }
     .archive-item { grid-template-columns: 1fr; gap: 15px; }
 }
