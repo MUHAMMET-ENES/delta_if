@@ -7,6 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
+    
+    <style>
+        /* Gizli Mürekkep: Parantez YOK, sadece boşluk */
+        .hidden-ink::before { content: '' !important; }
+        .hidden-ink { background: rgba(100,100,100,0.1); min-width: 20px; display: inline-block; vertical-align: bottom; }
+        .hidden-ink:hover { background: transparent; }
+    </style>
 </head>
 
 <body class="lang-tr">
@@ -34,6 +41,8 @@
             </div>
 
             <div class="nav-row">
+                <a href="archive.html" class="tool-btn" style="text-decoration:none;">Archive</a>
+                
                 <button class="tool-btn" onclick="toggleZen()" title="Zen Mode">👁 Zen</button>
                 <button class="tool-btn" onclick="toggleMusic()" id="music-btn">Sound</button>
                 <button class="tool-btn" onclick="toggleTheme()">Theme</button>
@@ -59,7 +68,7 @@
     <main class="page-container">
 
         <section class="writers-desk reveal">
-            <div class="desk-icon" onclick="startTypewriter()" title="Open Notebook">
+            <div class="desk-icon" onclick="startTypewriter()" title="Open Manifesto">
                 📓
             </div>
             
@@ -76,11 +85,11 @@
                 <h2 class="content-tr">Yokluk Varsayımı</h2>
                 
                 <div class="essay-body content-en physics-enabled">
-                    What if <span class="hidden-ink">silence</span> was the only language we had left? Meaning would drift from sounds to gestures, and finally, to the space between us. The real message is hidden in what we do not say.
+                    What if <span class="hidden-ink">silence</span> was the only language we had left? Meaning would drift from sounds to gestures, and finally, to the space between us. The real message is hidden <span class="hidden-ink">in what we do not say</span>.
                 </div>
                 
                 <div class="essay-body content-tr physics-enabled">
-                    Ya elimizde kalan tek dil <span class="hidden-ink">sessizlik</span> olsaydı? Anlam, seslerden jestlere, ve sonunda aramızdaki boşluğa sürüklenirdi. Asıl mesaj söylemediklerimizde gizlidir.
+                    Ya elimizde kalan tek dil <span class="hidden-ink">sessizlik</span> olsaydı? Anlam, seslerden jestlere, ve sonunda aramızdaki boşluğa sürüklenirdi. Asıl mesaj <span class="hidden-ink">söylemediklerimizde gizlidir</span>.
                 </div>
                 
                 <div class="essay-body content-tr reality-alt" style="display:none; color:var(--highlight);">
@@ -114,7 +123,7 @@
     </main>
 
     <script>
-        // --- 1. DAKTİLO EFEKTİ (MANIFESTO) ---
+        // --- 1. DAKTİLO EFEKTİ (GÜNCELLENMİŞ MANİFESTO) ---
         const manifestoTR = `HAKKINDA — ΔIf\n\nVar olanı açıklamak için yazmıyorum.\nBir koşul değiştiğinde geriye ne kaldığını görmek için yazıyorum.\n\nΔIf, küçük ama kalıcı bir rahatsızlıktan doğdu:\nçoğu anlatı, gerçekliği sanki kaçınılmazmış gibi sunuyor.\nBeni ilgilendiren şey, bu kaçınılmazlık askıya alındığında ortaya çıkan boşluk.\n\nBuradaki her metin bir varsayımla başlar.\nKanıtlanması gereken bir hipotez olarak değil,\ngeçici olarak takılan bir bakış biçimi olarak.\n\nEğer bir şey eksik olsaydı ne olurdu?\nEğer bir şey fazla olsaydı, ne bozulurdu?\nAnlam hangi noktada incelir — ya da çöker?\n\nSonuç aramıyorum.\nSonuçların izini sürüyorum.\n\nBu arşiv kronolojik değil.\nTematik, döngüsel ve bilinçli biçimde eksik.\nMetinler ilerlemez;\nbirbirine uzaktan seslenir.\n\nSeçilmiş bir rumuzla yazıyorum.\nBu, kimliği saklamak için değil,\nyorumu merkezinden çekmek için.\nBurada odakta olan yazar değil, koşuldur.\n\nΔIf cevapların bir toplamı değil.\nKarşı-olgusal bir dikkat alanıdır.\n\nEğer buradaki bir metin seni huzursuz ediyorsa,\nmuhtemelen işini yapmıştır.\n\n— Varsayımı Üstlenen.`;
 
         const manifestoEN = `ABOUT — ΔIf\n\nI do not write to explain what exists.\nI write to test what remains when a condition is altered.\n\nΔIf was born from a simple discomfort:\nmost narratives describe reality as if it were inevitable.\nI am interested in what happens when inevitability is suspended.\n\nEach text here begins with an assumption.\nNot as a hypothesis to be proven,\nbut as a lens to be worn temporarily.\n\nWhat if something essential were missing?\nWhat if something familiar became excessive?\nAt what point does meaning thin out — or collapse?\n\nI do not seek conclusions.\nI trace consequences.\n\nThis archive is not chronological.\nIt is thematic, recursive, and deliberately incomplete.\nTexts speak to one another across distance,\nas assumptions echo rather than progress.\n\nI write under a chosen name,\nnot to conceal identity,\nbut to remove it from the center of interpretation.\nThe focus is the condition — not its author.\n\nΔIf is not a collection of answers.\nIt is a space for counterfactual attention.\n\nIf something here unsettles you,\nit has likely done its work.\n\n— The One Who Assumed`;
@@ -128,9 +137,8 @@
             const area = document.getElementById('manifesto-area');
             const textSpan = document.getElementById('manifesto-text');
             area.style.display = 'block';
-            textSpan.innerHTML = ''; // Temizle
+            textSpan.innerHTML = ''; 
             
-            // Hangi dil aktif?
             const isTR = document.body.classList.contains('lang-tr');
             const textToType = isTR ? manifestoTR : manifestoEN;
             
@@ -143,7 +151,7 @@
                         textSpan.innerHTML += textToType.charAt(i);
                     }
                     i++;
-                    setTimeout(type, 30); // Yazma hızı
+                    setTimeout(type, 25); 
                 } else {
                     isTyping = false;
                 }
@@ -151,57 +159,41 @@
             type();
         }
 
-        // --- 2. ENTROPİ FİZİK MOTORU (KELİME UÇURMA) ---
+        // --- 2. ENTROPİ FİZİK MOTORU ---
         const slider = document.getElementById('entropy-slider');
         let words = [];
         
-        // Sayfa yüklenince kelimeleri span içine al
         function splitWords() {
             document.querySelectorAll('.physics-enabled').forEach(el => {
-                // HTML yapısını bozmamak için sadece text node'ları işle
-                // (Basitlik için burada innerHTML replace yapıyoruz ama dikkatli olunmalı)
                 const text = el.innerText; 
-                // Kelimelere ayır ve span ile sarmala
                 const splitText = text.split(' ').map(word => `<span class="kinetic-word">${word} </span>`).join('');
                 el.innerHTML = splitText;
             });
-            
-            // Spanları listeye al ve başlangıç pozisyonlarını kaydet
             setTimeout(() => {
                 document.querySelectorAll('.kinetic-word').forEach(span => {
                     words.push({
                         element: span,
-                        x: 0,
-                        y: 0,
-                        vx: (Math.random() - 0.5) * 5, // Rastgele hız
+                        x: 0, y: 0,
+                        vx: (Math.random() - 0.5) * 5, 
                         vy: (Math.random() - 0.5) * 5
                     });
                 });
             }, 500);
         }
-        
         window.addEventListener('load', splitWords);
 
-        // Animasyon Döngüsü
         function animateEntropy() {
-            const entropy = slider.value; // 0 ile 100 arası
-            
+            const entropy = slider.value;
             if (entropy > 0) {
                 words.forEach(word => {
-                    // Entropi arttıkça hareket serbestliği artar
                     const movementScale = entropy / 10; 
-                    
                     word.x += word.vx * (entropy / 50); 
                     word.y += word.vy * (entropy / 50);
-
-                    // Sınır kontrolü (Basitçe geri dönme)
                     if (Math.abs(word.x) > 50 * movementScale) word.vx *= -1;
                     if (Math.abs(word.y) > 50 * movementScale) word.vy *= -1;
-
                     word.element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.x}deg)`;
                 });
             } else {
-                // Entropi 0 ise her şeyi sıfırla
                 words.forEach(word => {
                     word.x = 0; word.y = 0;
                     word.element.style.transform = `translate(0,0)`;
@@ -211,29 +203,19 @@
         }
         animateEntropy();
 
-        // --- 3. REALITY SWITCH (PARAGRAF DEĞİŞİMİ) ---
+        // --- 3. REALITY SWITCH ---
         function toggleReality() {
             const isChecked = document.getElementById('reality-toggle').checked;
-            // Check edilirse (Sağ taraf) -> Absence (Varsayılan)
-            // Check edilmezse (Sol taraf) -> Excess (Alternatif)
-            
-            // Not: Kullanıcı "Sağa switch ederse Yokluk" dedi. 
-            // Checkbox mantığı: Checked = True.
-            
-            // Burada basit bir display toggle yapacağız
             const normalTexts = document.querySelectorAll('.essay-body:not(.reality-alt)');
             const altTexts = document.querySelectorAll('.reality-alt');
             
             if (isChecked) {
-                // YOKLUK MODU (Varsayılanı Göster)
                 normalTexts.forEach(el => el.style.display = 'block');
                 altTexts.forEach(el => el.style.display = 'none');
                 document.body.style.filter = "none";
             } else {
-                // AŞIRILIK MODU (Alternatifi Göster)
                 normalTexts.forEach(el => el.style.display = 'none');
                 altTexts.forEach(el => el.style.display = 'block');
-                // Hafif bir görsel bozulma (Glitch) ekle
                 document.body.style.filter = "contrast(1.2) saturate(1.2)";
             }
         }
@@ -242,7 +224,6 @@
         function setLang(lang) {
             document.body.className = document.body.className.replace(/lang-\w+/, '');
             document.body.classList.add('lang-' + lang);
-            // Daktilo metni açıksa kapat ki dil değişince karışmasın
             document.getElementById('manifesto-area').style.display = 'none';
             isTyping = false;
         }
@@ -255,7 +236,6 @@
             audio.paused ? (audio.play(), document.getElementById('music-btn').innerText = "Pause") : (audio.pause(), document.getElementById('music-btn').innerText = "Sound");
         }
 
-        // Reveal & Cursor
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
         window.addEventListener("scroll", () => {
@@ -263,27 +243,10 @@
                 if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
             });
         });
-        
-        // Tab Başlığı Değişimi
         document.addEventListener("visibilitychange", () => {
             document.title = document.hidden ? "Missing..." : "ΔIf — Muhammet Enes Karaoğlan";
         });
     </script>
-    <script src="https://giscus.app/client.js"
-        data-repo="MUHAMMET-ENES/delta_if"
-        data-repo-id="R_kgDORD6-vQ"
-        data-category="General"
-        data-category-id="DIC_kwDORD6-vc4C1okw"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="tr"
-        crossorigin="anonymous"
-        async>
-</script>
-
+    
     </body>
 </html>
