@@ -3,69 +3,60 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ΔIf — A counterfactual archive exploring absence and excess.">
-    <meta property="og:title" content="ΔIf — The One Who Assumed">
-    <meta property="og:image" content="cover.jpg">
-    <meta name="twitter:card" content="summary_large_image">
+    
     <title>ΔIf — The One Who Assumed</title>
     <meta name="description" content="A counterfactual archive. What would remain if something were missing?">
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
-
-    <meta property="og:type" content="website">
     <meta property="og:title" content="ΔIf — The One Who Assumed">
     <meta property="og:description" content="A counterfactual archive. What would remain if something were missing?">
-    <meta property="og:url" content="https://muhammet-enes.github.io/delta_if/">
-    <meta property="og:image" content="https://muhammet-enes.github.io/delta_if/cover.jpg">
-
+    <meta property="og:image" content="cover.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ΔIf — The One Who Assumed">
-    <meta name="twitter:description" content="What if it were missing? A counterfactual editorial archive.">
-    <meta name="twitter:image" content="https://muhammet-enes.github.io/delta_if/cover.jpg">
 
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
+    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="issue-missing">
-<div id="progress-bar"></div>
-    <nav class="lang-switch">
-        <button id="btn-en" class="active" onclick="setLanguage('en')">EN</button>
-        <span class="separator">|</span>
-        <button id="btn-tr" onclick="setLanguage('tr')">TR</button>
-    </nav>
+
+    <div id="progress-bar"></div>
+
+    <header class="hero-section">
+        <div class="hero-bg">
+            <img src="cover.jpg" alt="Editorial Cover Art">
+            <div class="overlay"></div>
+        </div>
+
+        <nav class="lang-switch">
+            <button id="btn-en" class="active" onclick="setLanguage('en')">EN</button>
+            <span class="separator">|</span>
+            <button id="btn-tr" onclick="setLanguage('tr')">TR</button>
+        </nav>
+
+        <div class="hero-content">
+            <h1>ΔIf</h1>
+            <div class="content-en visible">
+                <span class="subtitle">The One Who Assumed</span>
+                <div class="questions">
+                    <p>What if it were missing?</p>
+                    <p>What if it were excessive?</p>
+                </div>
+            </div>
+            <div class="content-tr">
+                <span class="subtitle">Varsayım Yapan</span>
+                <div class="questions">
+                    <p>Ya eksik olsaydı?</p>
+                    <p>Ya fazla olsaydı?</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">↓</div>
+    </header>
 
     <main class="page-container">
         
-        <header class="header-grid">
-            <div class="title-block">
-                <h1>ΔIf</h1>
-                
-                <div class="content-en visible">
-                    <span class="subtitle">The One Who Assumed</span>
-                    <div class="questions">
-                        <p>What if it were missing?</p>
-                        <p>What if it were excessive?</p>
-                    </div>
-                </div>
-
-                <div class="content-tr">
-                    <span class="subtitle">Varsayım Yapan</span>
-                    <div class="questions">
-                        <p>Ya eksik olsaydı?</p>
-                        <p>Ya fazla olsaydı?</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cover-wrapper">
-                <img src="cover.jpg" alt="Editorial Cover Art">
-                <div class="overlay"></div> </div>
-        </header>
-
-        <div class="divider"></div>
-
         <section class="manifesto">
             <div class="content-en visible">
                 <p><strong>ΔIf</strong> is a counterfactual archive.</p>
@@ -78,7 +69,6 @@
         </section>
 
         <section class="essays-grid">
-            
             <article class="content-en visible essay-item">
                 <h2>Assumption of Absence</h2>
                 <p class="drop-cap">
@@ -114,32 +104,29 @@
                     olmaktan çıkar ve ortama dönüşür.
                 </p>
             </article>
-
         </section>
 
         <footer>
             <div class="content-en visible">
                 <p>ΔIf — A counterfactual editorial archive</p>
                 <p class="license">Except where otherwise noted, content is licensed under CC BY-NC-ND 4.0</p>
+                <p style="margin-top: 15px;"><a href="archive.html" style="color: inherit; border-bottom: 1px solid #999; text-decoration: none;">View Archive</a></p>
             </div>
             <div class="content-tr">
                 <p>ΔIf — Karşı-olgusal bir düşünce arşivi</p>
                 <p class="license">Aksi belirtilmedikçe, içerikler CC BY-NC-ND 4.0 ile lisanslanmıştır</p>
+                <p style="margin-top: 15px;"><a href="archive.html" style="color: inherit; border-bottom: 1px solid #999; text-decoration: none;">Arşivi Gör</a></p>
             </div>
-            <p style="margin-top: 20px;">
-    <a href="archive.html" style="color: inherit; text-decoration: none; border-bottom: 1px solid #999;">Archive</a>
-</p>
         </footer>
 
     </main>
 
     <script>
+        // Dil Değiştirme Fonksiyonu
         function setLanguage(lang) {
-            // Görünürlük sınıflarını temizle
             document.querySelectorAll('.content-en, .content-tr').forEach(el => el.classList.remove('visible'));
             document.querySelectorAll('#btn-en, #btn-tr').forEach(el => el.classList.remove('active'));
 
-            // Seçilen dili aktif et
             if (lang === 'en') {
                 document.querySelectorAll('.content-en').forEach(el => el.classList.add('visible'));
                 document.getElementById('btn-en').classList.add('active');
@@ -148,6 +135,14 @@
                 document.getElementById('btn-tr').classList.add('active');
             }
         }
+
+        // Okuma Çubuğu Fonksiyonu
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
     </script>
 </body>
 </html>
