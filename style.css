@@ -1,174 +1,227 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ================= DEĞİŞKENLER ================= */
+:root {
+    --bg-color: #f8f8f6;
+    --text-main: #1a1a1a;
+    --text-muted: #666;
+    --line-color: #e5e5e5;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
 }
+
+/* ================= TEMEL AYARLAR ================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: #f7f7f7;
-  color: #111;
-  font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease;
 }
 
-/* COVER */
+/* Seçim Rengi (Premium His) */
+::selection { background: #333; color: #fff; }
 
-.cover {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px;
 }
 
-.cover-grid {
-  max-width: 1100px;
-  width: 100%;
-  padding: 0 32px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
+/* ================= DİL ANAHTARI ================= */
+.lang-switch {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    font-size: 0.85rem;
+    z-index: 100;
 }
 
-.cover-text h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 80px;
-  font-weight: 600;
-  margin-bottom: 24px;
+.lang-switch button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 500;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+    letter-spacing: 0.1em;
 }
 
-.author {
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #666;
-  margin-bottom: 48px;
+.lang-switch button.active {
+    opacity: 1;
+    border-bottom: 1px solid currentColor;
 }
 
-.question {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  margin-bottom: 16px;
+.lang-switch .separator { margin: 0 8px; opacity: 0.2; }
+
+/* ================= KAPAK (HEADER) ================= */
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+    min-height: 80vh;
+    margin-bottom: 120px;
 }
 
-.cover-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  filter: grayscale(100%);
+.title-block h1 {
+    font-family: var(--font-heading);
+    font-size: 5.5rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
 }
 
-/* MANIFESTO */
+.subtitle {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    display: block;
+}
+
+.questions {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    line-height: 1.4;
+    color: #333;
+}
+
+/* ================= GÖRSEL & ISSUE FİLTRELERİ ================= */
+.cover-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.cover-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transform: scale(1.02);
+    animation: imageReveal 1.5s ease forwards 0.3s;
+    transition: filter 1s ease;
+}
+
+@keyframes imageReveal {
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Issue 1: Missing (Gri/Soluk) */
+body.issue-missing .cover-wrapper img {
+    filter: grayscale(100%) contrast(90%) brightness(105%);
+}
+
+/* Issue 2: Excessive (Canlı/Sıcak) */
+body.issue-excessive .cover-wrapper img {
+    filter: saturate(140%) contrast(110%) sepia(15%);
+}
+
+/* Issue 3: Collapse (Karanlık/Sert) */
+body.issue-collapse {
+    background-color: #f0f0f0;
+    color: #000;
+}
+body.issue-collapse .cover-wrapper img {
+    filter: grayscale(100%) contrast(140%) brightness(80%);
+}
+
+/* ================= MANIFESTO & DENEMELER ================= */
+.divider {
+    height: 1px;
+    background: var(--line-color);
+    width: 100%;
+    margin: 0 0 100px 0;
+}
 
 .manifesto {
-  max-width: 720px;
-  margin: 160px auto;
-  padding: 0 24px;
-}
-
-.manifesto-lead {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  margin-bottom: 32px;
+    max-width: 680px;
+    margin: 0 auto 120px auto;
+    text-align: center;
 }
 
 .manifesto p {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  line-height: 1.7;
-  margin-bottom: 32px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
 }
 
-/* THEMES */
-
-.themes {
-  max-width: 720px;
-  margin: 200px auto;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+.essays-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 150px;
 }
 
-.themes a {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  text-decoration: none;
-  color: #111;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 12px;
+.essay-item h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #111;
+    display: inline-block;
+    padding-bottom: 8px;
 }
 
-.themes a:hover {
-  border-bottom-color: #000;
+.essay-item p {
+    font-size: 1.05rem;
+    text-align: justify;
 }
 
-/* RESPONSIVE */
+/* Drop Cap (Büyük Başlangıç Harfi) */
+.drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-heading);
+    font-size: 4.5rem;
+    line-height: 0.8;
+    margin-right: 12px;
+    margin-top: 4px;
+}
 
+/* ================= DİL GEÇİŞ ANİMASYONU ================= */
+.content-en, .content-tr {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.content-en.visible, .content-tr.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= FOOTER ================= */
+footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--line-color);
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.license { margin-top: 10px; font-size: 0.75rem; opacity: 0.7; }
+
+/* ================= RESPONSIVE (MOBİL) ================= */
 @media (max-width: 900px) {
-  .cover-grid {
-    grid-template-columns: 1fr;
-  }
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    .page-container { padding: 40px 24px; }
+    
+    .header-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+        min-height: auto;
+    }
 
-body {
-  font-family: "Georgia", serif;
-  background: #f6f5f3;
-  color: #111;
-}
-
-/* COVER */
-.cover {
-  height: 100vh;
-  background-image: url("cover.jpg");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Soft veil for readability */
-.cover-overlay {
-  background: rgba(246, 245, 243, 0.75);
-  padding: 4rem 5rem;
-  text-align: center;
-}
-
-/* Title */
-.cover-overlay h1 {
-  font-size: 4rem;
-  letter-spacing: 0.05em;
-  font-weight: normal;
-}
-
-/* Subtitle */
-.tagline {
-  margin-top: 1.2rem;
-  font-size: 1rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.editorial {
-  max-width: 1100px;
-  margin: 6rem auto;
-  padding: 0 2rem;
-  column-count: 2;
-  column-gap: 4rem;
-}
-
-.editorial h2 {
-  font-size: 1.2rem;
-  letter-spacing: 0.08em;
-  margin-bottom: 1rem;
-}
-
-.editorial p {
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 3rem;
+    .cover-wrapper { order: -1; } /* Mobilde görsel üstte */
+    
+    .title-block h1 { font-size: 4rem; }
+    
+    .essays-grid { grid-template-columns: 1fr; gap: 60px; }
+    
+    .essay-item p { text-align: left; }
 }
