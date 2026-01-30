@@ -1,192 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ΔIf — The One Who Assumed</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ΔIf — The One Who Assumed</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ================= DEĞİŞKENLER & RESET ================= */
+        :root {
+            --bg-color: #f8f8f6; /* Kırık beyaz, göz yormayan kağıt tonu */
+            --text-color: #1a1a1a;
+            --accent-color: #444; 
+            --selection-bg: #222; /* Seçim yapıldığında arka plan */
+            --selection-text: #fff; /* Seçim yapıldığında yazı rengi */
+            --transition-speed: 0.6s;
+        }
 
-  <style>
-    :root {
-      --text-main: #111;
-      --text-muted: #666;
-      --line: #e5e5e5;
-      --bg: #ffffff;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    * {
-      box-sizing: border-box;
-    }
+        ::selection {
+            background: var(--selection-bg);
+            color: var(--selection-text);
+        }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text-main);
-      font-family: 'Inter', sans-serif;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden; /* Yan kaymayı engelle */
+        }
 
-    .page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 60px;
-    }
+        /* ================= DİL DEĞİŞTİRİCİ (TOGGLE) ================= */
+        .lang-switch {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            z-index: 100;
+            cursor: pointer;
+        }
 
-    /* HEADER */
-    .header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      margin-bottom: 120px;
-    }
+        .lang-switch span {
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
 
-    .title h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 64px;
-      margin: 0 0 12px 0;
-    }
+        .lang-switch span.active {
+            opacity: 1;
+            font-weight: 600;
+            border-bottom: 1px solid #000;
+        }
 
-    .subtitle {
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-    }
+        .lang-switch span:hover {
+            opacity: 0.8;
+        }
 
-    .questions {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      line-height: 1.6;
-    }
+        /* ================= MİZANPAJ (LAYOUT) ================= */
+        .page-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
 
-    /* IMAGE */
-    .cover img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: none; /* ❗ griyi kesin kapatır */
-    }
+        /* Header Grid Yapısı */
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+            min-height: 80vh; /* Ekranı doldursun */
+            margin-bottom: 120px;
+        }
 
-    /* DIVIDER */
-    .divider {
-      border-top: 1px solid var(--line);
-      margin: 120px 0;
-    }
+        /* Sol Taraf: Tipografi */
+        .title-block h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.04em;
+        }
 
-    /* EDITORIAL TEXT */
-    .editorial {
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      line-height: 1.8;
-    }
+        .subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #666;
+            margin-bottom: 3rem;
+            display: block;
+        }
 
-    .editorial p {
-      margin-bottom: 36px;
-    }
+        .questions {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            line-height: 1.4;
+            color: #333;
+        }
 
-    /* TWO COLUMN ESSAY */
-    .essay {
-      margin-top: 120px;
-      column-count: 2;
-      column-gap: 80px;
-      font-size: 16px;
-      line-height: 1.9;
-    }
+        .questions p { margin-bottom: 0.5rem; }
 
-    .essay h2 {
-      font-family: 'Playfair Display', serif;
-      column-span: all;
-      font-size: 32px;
-      margin-bottom: 40px;
-    }
+        /* Sağ Taraf: Görsel */
+        .cover-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      margin-top: 160px;
-      font-size: 14px;
-      color: var(--text-muted);
-    }
+        .cover-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0;
+            transform: scale(1.03);
+            animation: imageFadeIn 2s ease forwards 0.5s; /* Gecikmeli giriş */
+            transition: filter 1s ease; /* Issue değişimi için yumuşak geçiş */
+        }
 
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .header {
-        grid-template-columns: 1fr;
-      }
+        @keyframes imageFadeIn {
+            to { opacity: 1; transform: scale(1); }
+        }
 
-      .essay {
-        column-count: 1;
-      }
+        /* ================= ISSUE SİSTEMİ (GÖRSEL FİLTRELERİ) ================= */
+        /* Varsayılan: Nötr */
+        
+        /* Missing (Eksiklik): Soluk, Gri */
+        body.issue-missing .cover-wrapper img {
+            filter: grayscale(100%) contrast(90%) brightness(105%);
+        }
 
-      .page {
-        padding: 60px 24px;
-      }
-    }
-  </style>
+        /* Excessive (Aşırılık): Doygun, Sıcak */
+        body.issue-excessive .cover-wrapper img {
+            filter: saturate(140%) contrast(110%) sepia(15%);
+        }
+
+        /* Collapse (Çöküş): Karanlık */
+        body.issue-collapse .cover-wrapper img {
+            filter: grayscale(100%) contrast(130%) brightness(70%);
+        }
+
+        /* ================= EDITORYAL İÇERİK ================= */
+        .divider {
+            height: 1px;
+            background: #e5e5e5;
+            width: 100%;
+            margin: 0 0 100px 0;
+        }
+
+        /* Manifesto */
+        .manifesto {
+            max-width: 680px;
+            margin: 0 auto 120px auto;
+            text-align: center;
+        }
+
+        .manifesto p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #222;
+            margin-bottom: 2rem;
+            /* Premium his için yavaşça belirme */
+            opacity: 0;
+            animation: textFadeUp 1s ease forwards 1s;
+        }
+
+        @keyframes textFadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Denemeler (Essays) */
+        .essays-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 150px;
+        }
+
+        .essay-item h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #111;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        .essay-item p {
+            font-size: 1.05rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: justify; /* Dergi gibi iki yana yasla */
+        }
+
+        /* MİKRO TİPOGRAFİ: DROP CAP (Büyük İlk Harf) */
+        .drop-cap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            margin-right: 12px;
+            margin-top: 4px;
+            color: #111;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .license {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        /* ================= RESPONSIVE (MOBİL) ================= */
+        @media (max-width: 900px) {
+            .header-grid, .essays-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .header-grid { text-align: center; }
+            .title-block h1 { font-size: 4rem; }
+            .cover-wrapper { order: -1; margin-bottom: 40px; }
+            .lang-switch { top: 20px; right: 20px; }
+            .page-container { padding: 40px 24px; }
+        }
+
+        /* ================= DİL GÖRÜNÜRLÜĞÜ ================= */
+        .content-en, .content-tr {
+            display: none; /* Başlangıçta hepsi gizli, JS açacak */
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .content-en.visible, .content-tr.visible {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+    </style>
 </head>
 
-<body>
-  <main class="page">
+<body class="issue-missing">
 
-    <!-- HEADER -->
-    <section class="header">
-      <div class="title">
-        <h1>ΔIf</h1>
-        <div class="subtitle">The One Who Assumed</div>
-        <div class="questions">
-          What if it were missing?<br>
-          What if it were excessive?
-        </div>
-      </div>
+    <div class="lang-switch">
+        <span id="btn-en" class="active" onclick="setLanguage('en')">EN</span>
+        <span style="opacity:0.2">|</span>
+        <span id="btn-tr" onclick="setLanguage('tr')">TR</span>
+    </div>
 
-      <div class="cover">
-        <img src="cover.jpg" alt="ΔIf Cover">
-      </div>
-    </section>
+    <main class="page-container">
+        
+        <header class="header-grid">
+            <div class="title-block">
+                <h1>ΔIf</h1>
+                
+                <div class="content-en visible">
+                    <span class="subtitle">The One Who Assumed</span>
+                    <div class="questions">
+                        <p>What if it were missing?</p>
+                        <p>What if it were excessive?</p>
+                    </div>
+                </div>
 
-    <div class="divider"></div>
+                <div class="content-tr">
+                    <span class="subtitle">Varsayım Yapan</span>
+                    <div class="questions">
+                        <p>Ya eksik olsaydı?</p>
+                        <p>Ya fazla olsaydı?</p>
+                    </div>
+                </div>
 
-    <!-- MANIFESTO -->
-    <section class="editorial">
-      <p><strong>ΔIf</strong> is a counterfactual archive.</p>
+            </div>
 
-      <p>
-        It does not describe what is.
-        It asks what would remain if something were missing —
-        or what would collapse if it were excessive.
-      </p>
+            <div class="cover-wrapper">
+                <img src="cover.jpg" alt="Editorial Cover">
+            </div>
+        </header>
 
-      <p>
-        Every text here assumes a condition and follows its consequences.
-      </p>
-    </section>
+        <div class="divider"></div>
 
-    <!-- ESSAY -->
-    <section class="essay">
-      <h2>Assumption</h2>
+        <section class="manifesto">
+            <div class="content-en visible">
+                <p><strong>ΔIf</strong> is a counterfactual archive.</p>
+                <p>It does not describe what is. It asks what would remain if something were missing — or what would collapse if it were excessive.</p>
+            </div>
 
-      <p>
-        What disappears first is not the object,
-        but the assumption that it was ever necessary.
-      </p>
+            <div class="content-tr">
+                <p><strong>ΔIf</strong> bir karşı-olgusal arşivdir.</p>
+                <p>Olanı anlatmaz. Bir şey eksik olsaydı geriye ne kalacağını — ya da aşırı olsaydı neyin çökeceğini sorar.</p>
+            </div>
+        </section>
 
-      <p>
-        Excess does not announce itself.
-        It arrives disguised as comfort,
-        repeating itself until absence feels violent.
-      </p>
-    </section>
+        <section class="essays-grid">
+            
+            <div class="content-en visible essay-item">
+                <h2>Assumption of Absence</h2>
+                <p class="drop-cap">
+                    What disappears first is not the object, but the assumption that it was ever necessary. 
+                    Silence does not answer questions; it simply removes the space where the question could stand. 
+                    Without the structure we rely on, meaning does not vanish—it simply becomes fluid, 
+                    terrifyingly free.
+                </p>
+            </div>
 
-    <footer>
-      ΔIf — A counterfactual editorial archive
-    </footer>
+            <div class="content-en visible essay-item">
+                <h2>Assumption of Excess</h2>
+                <p>
+                    Excess does not announce itself. It arrives disguised as comfort, repeating itself 
+                    until the absence of noise feels like violence. When a signal is everywhere, it ceases 
+                    to be information and becomes environment. We do not hear the hum, until it stops.
+                </p>
+            </div>
 
-  </main>
+            <div class="content-tr essay-item">
+                <h2>Yokluk Varsayımı</h2>
+                <p class="drop-cap">
+                    İlk kaybolan şey nesnenin kendisi değil, onun gerekli olduğuna dair varsayımdır. 
+                    Sessizlik sorulara cevap vermez; sadece sorunun durabileceği zemini ortadan kaldırır. 
+                    Güvendiğimiz yapı olmadan anlam yok olmaz; sadece akışkanlaşır ve ürkütücü derecede 
+                    özgür hale gelir.
+                </p>
+            </div>
+
+            <div class="content-tr essay-item">
+                <h2>Aşırılık Varsayımı</h2>
+                <p>
+                    Aşırılık kendini duyurarak gelmez. Konfor kılığında gelir, gürültünün yokluğu şiddet 
+                    gibi hissedilene kadar kendini tekrar eder. Bir sinyal her yerde olduğunda, bilgi 
+                    olmaktan çıkar ve ortama dönüşür. Uğultuyu duymayız, ta ki durana kadar.
+                </p>
+            </div>
+
+        </section>
+
+        <footer>
+            <div class="content-en visible">
+                <p>ΔIf — A counterfactual editorial archive</p>
+                <p class="license">Except where otherwise noted, content is licensed under CC BY-NC-ND 4.0</p>
+            </div>
+            <div class="content-tr">
+                <p>ΔIf — Karşı-olgusal bir düşünce arşivi</p>
+                <p class="license">Aksi belirtilmedikçe, içerikler CC BY-NC-ND 4.0 ile lisanslanmıştır</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        function setLanguage(lang) {
+            // 1. Tüm içerikleri gizle
+            document.querySelectorAll('.content-en').forEach(el => el.classList.remove('visible'));
+            document.querySelectorAll('.content-tr').forEach(el => el.classList.remove('visible'));
+
+            // 2. Butonların aktifliğini kaldır
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById('btn-tr').classList.remove('active');
+
+            // 3. Seçilen dili aç
+            if (lang === 'en') {
+                document.querySelectorAll('.content-en').forEach(el => el.classList.add('visible'));
+                document.getElementById('btn-en').classList.add('active');
+            } else {
+                document.querySelectorAll('.content-tr').forEach(el => el.classList.add('visible'));
+                document.getElementById('btn-tr').classList.add('active');
+            }
+        }
+    </script>
+
 </body>
 </html>
