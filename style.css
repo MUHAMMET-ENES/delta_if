@@ -1,15 +1,17 @@
-/* ================= 1. DEĞİŞKENLER & RENK PALETİ ================= */
+/* ================= DEĞİŞKENLER ================= */
 :root {
-    --bg-color: #fdfbf7; /* İstenen Krem Rengi */
+    --bg-color: #fdfbf7;
     --text-main: #1a1a1a;
     --text-muted: #5c5c5c;
     --line-color: #e0deda;
-    
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
-    
     --cursor-color: #000;
-    --highlight: #c59d5f; /* Altın/Toprak tonu vurgu */
+    --highlight: #c59d5f;
+    
+    /* Akışkan Arka Plan Renkleri */
+    --gradient-1: rgba(197, 157, 95, 0.15); /* Altın tonu */
+    --gradient-2: rgba(100, 100, 100, 0.1); /* Gri tonu */
 }
 
 body.dark-mode {
@@ -19,183 +21,130 @@ body.dark-mode {
     --line-color: #333;
     --cursor-color: #fff;
     --highlight: #f4a261;
+    --gradient-1: rgba(244, 162, 97, 0.1);
+    --gradient-2: rgba(50, 50, 50, 0.2);
 }
 
-/* ================= 2. TEMEL AYARLAR ================= */
-* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Standart imleci gizle */ }
+/* ================= TEMEL AYARLAR ================= */
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: var(--font-body);
     line-height: 1.8;
-    overflow-x: hidden; /* Yatay kaydırmayı engelle */
+    overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* KAĞIT DOKUSU (NOISE) - En arkada ama Canvas'ın önünde */
+/* ================= YENİ: MODERN AKIŞKAN ARKA PLAN (FLUID) ================= */
+.fluid-background {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; overflow: hidden; pointer-events: none;
+}
+.fluid-blob {
+    position: absolute;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: float 20s infinite ease-in-out;
+    border-radius: 50%;
+}
+.blob-1 {
+    top: -10%; left: -10%; width: 50vw; height: 50vw;
+    background: var(--gradient-1);
+    animation-delay: 0s;
+}
+.blob-2 {
+    bottom: -10%; right: -10%; width: 60vw; height: 60vw;
+    background: var(--gradient-2);
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, 50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+/* KAĞIT DOKUSU (Hafifletildi) */
 .noise-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; /* Tıklamayı engelleme! */
-    z-index: -1; 
-    opacity: 0.04;
+    pointer-events: none; z-index: -1; opacity: 0.03;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* CANLI AĞ (CANVAS) - En arkada */
-#neural-canvas {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -2; pointer-events: none; opacity: 1;
-}
-
-/* ================= 3. KESİN AYRIM (STRICT REALITY LOGIC) ================= */
-/* Mantık:
-   - Varsayılan (Body'de class yok): ABSENCE açık, EXCESS kapalı.
-   - Body'de .state-excess varsa: EXCESS açık, ABSENCE kapalı.
-*/
-
-/* Varsayılan Durum */
+/* ================= KESİN AYRIM (STRICT REALITY) ================= */
 .content-excess, .hero-excess { display: none !important; }
 .content-absence, .hero-absence { display: block !important; }
 
-/* Switch Açıldığında (Excess Modu) */
-body.state-excess .content-absence, 
-body.state-excess .hero-absence { display: none !important; }
+body.state-excess .content-absence, body.state-excess .hero-absence { display: none !important; }
+body.state-excess .content-excess, body.state-excess .hero-excess { display: block !important; }
 
-body.state-excess .content-excess, 
-body.state-excess .hero-excess { display: block !important; }
-
-
-/* ================= 4. HEADER & NAVİGASYON (AKILLI MENÜ) ================= */
+/* ================= HEADER & NAV ================= */
 .top-header {
-    position: fixed; top: 0; left: 0; width: 100%;
-    padding: 20px 40px;
-    display: flex; justify-content: space-between; align-items: center;
-    z-index: 1000;
-    background: rgba(253, 251, 247, 0.9); /* Arka planı hafif buzlu yap */
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    transition: transform 0.4s ease, background 0.5s;
+    position: fixed; top: 0; left: 0; width: 100%; padding: 25px 50px;
+    display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+    background: rgba(253, 251, 247, 0.8); backdrop-filter: blur(15px);
+    transition: transform 0.4s ease; border-bottom: 1px solid rgba(0,0,0,0.03);
 }
-body.dark-mode .top-header { background: rgba(10, 10, 10, 0.9); border-bottom: 1px solid rgba(255,255,255,0.05); }
+body.dark-mode .top-header { background: rgba(10, 10, 10, 0.8); border-bottom: 1px solid rgba(255,255,255,0.03); }
 
-/* Scroll Davranışı (JS ile class eklenecek) */
-body.scroll-down .top-header { transform: translateY(-100%); } /* Gizle */
-body.scroll-up .top-header { transform: translateY(0); } /* Göster */
+body.scroll-down .top-header { transform: translateY(-100%); }
+body.scroll-up .top-header { transform: translateY(0); }
 
-.brand-name {
-    font-family: var(--font-heading); text-transform: uppercase;
-    font-size: 1.1rem; letter-spacing: 0.1em; font-weight: 700;
-    pointer-events: auto;
-}
-
-.nav-controls { display: flex; align-items: center; gap: 20px; pointer-events: auto; }
-
+.brand-name { font-family: var(--font-heading); text-transform: uppercase; font-size: 1.1rem; letter-spacing: 0.1em; font-weight: 700; }
+.nav-controls { display: flex; align-items: center; gap: 25px; }
 .nav-link {
-    text-decoration: none; color: var(--text-muted); font-size: 0.75rem;
-    text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: 0.3s;
-    position: relative;
+    text-decoration: none; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: 0.3s; position: relative;
 }
 .nav-link:hover { color: var(--text-main); }
-/* Link altı çizgi animasyonu */
-.nav-link::after {
-    content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px;
-    background: var(--text-main); transition: width 0.3s ease;
-}
+.nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px; background: var(--text-main); transition: width 0.3s; }
 .nav-link:hover::after { width: 100%; }
 
-/* ================= 5. REALITY SWITCH TASARIMI ================= */
-.switch-wrapper {
-    display: flex; align-items: center; gap: 12px;
-    font-family: var(--font-heading); font-style: italic; font-size: 0.9rem; margin-right: 15px;
-}
+/* Switch */
+.switch-wrapper { display: flex; align-items: center; gap: 12px; font-family: var(--font-heading); font-style: italic; font-size: 0.9rem; margin-right: 15px; }
 .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
 .switch input { opacity: 0; width: 0; height: 0; }
-.slider {
-    position: absolute; cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #d1d1d1; transition: .4s; border-radius: 34px;
-}
-.slider:before {
-    position: absolute; content: "";
-    height: 16px; width: 16px;
-    left: 3px; bottom: 3px;
-    background-color: white;
-    transition: .4s; border-radius: 50%;
-}
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #d1d1d1; transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
 input:checked + .slider { background-color: var(--text-main); }
 input:checked + .slider:before { transform: translateX(22px); }
 
-
-/* ================= 6. ENTROPİ SLIDER ================= */
-.entropy-container {
-    position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
-    height: 250px; display: flex; flex-direction: column; align-items: center; gap: 10px;
-    z-index: 900; opacity: 0.3; transition: opacity 0.3s;
-}
-.entropy-container:hover { opacity: 1; }
-.entropy-label { writing-mode: vertical-rl; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
-input[type=range][orient=vertical] {
-    writing-mode: bt-lr; -webkit-appearance: slider-vertical;
-    width: 6px; height: 180px; cursor: none;
-}
-.kinetic-word { display: inline-block; white-space: pre; will-change: transform; position: relative; }
-
-/* ================= 7. HERO & İÇERİK ================= */
-.hero-section {
-    position: relative; width: 100%; height: 90vh;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; margin-bottom: 100px; padding-top: 60px;
-}
+/* ================= HERO & ENTROPY ================= */
+.hero-section { position: relative; width: 100%; height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 100px; padding-top: 60px; }
 .hero-bg { position: absolute; inset: 0; z-index: -2; background: #000; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
-
-.main-title {
-    font-family: var(--font-heading); font-size: 8rem; line-height: 1; margin-bottom: 20px; color: #fff;
-    text-shadow: 0 10px 40px rgba(0,0,0,0.6);
-}
-.hero-questions {
-    font-family: var(--font-heading); font-size: 2rem; font-style: italic; color: rgba(255,255,255,0.9);
-    animation: fadeInUp 1.5s ease;
-}
+.main-title { font-family: var(--font-heading); font-size: 8rem; line-height: 1; margin-bottom: 20px; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+.hero-questions { font-family: var(--font-heading); font-size: 2rem; font-style: italic; color: rgba(255,255,255,0.9); animation: fadeInUp 1.5s ease; }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+.entropy-container { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); height: 250px; display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 900; opacity: 0.3; transition: opacity 0.3s; }
+.entropy-container:hover { opacity: 1; }
+.entropy-label { writing-mode: vertical-rl; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
+input[type=range][orient=vertical] { writing-mode: bt-lr; -webkit-appearance: slider-vertical; width: 6px; height: 180px; cursor: none; }
+.kinetic-word { display: inline-block; white-space: pre; will-change: transform; position: relative; }
+
+/* ================= İÇERİK & FOOTER ================= */
 .page-container { max-width: 900px; margin: 0 auto; padding: 0 40px 150px 40px; }
 .essay-item { margin-bottom: 180px; }
-.essay-meta { 
-    font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; 
-    display: block; margin-bottom: 25px; border-left: 2px solid var(--text-main); padding-left: 20px; 
-}
+.essay-meta { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 25px; border-left: 2px solid var(--text-main); padding-left: 20px; }
 .essay-item h2 { font-family: var(--font-heading); font-size: 3.5rem; margin-bottom: 30px; line-height: 1.1; }
 .essay-body { font-size: 1.35rem; font-weight: 300; }
-
-/* Gizli Mürekkep (Parantezsiz) */
 .hidden-ink { color: transparent; background: rgba(100,100,100,0.15); transition: 0.6s ease; border-radius: 4px; }
 .hidden-ink:hover { color: var(--text-main); background: transparent; }
 
-/* ================= 8. FOOTER ================= */
 footer { text-align: center; padding: 80px 0; border-top: 1px solid var(--line-color); color: var(--text-muted); font-size: 0.85rem; }
 .footer-role { font-family: var(--font-heading); font-style: italic; margin-top: 5px; opacity: 0.7; }
 
-/* ================= 9. ÖZEL İMLEÇ & ZEN MODE ================= */
-#custom-cursor {
-    position: fixed; font-family: 'Times New Roman'; font-size: 24px; color: var(--cursor-color);
-    mix-blend-mode: difference; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
-}
-
-body.zen-active .top-header, 
-body.zen-active footer, 
-body.zen-active .entropy-container { display: none !important; }
-
-#zen-exit {
-    position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
-    background: var(--text-main); color: var(--bg-color);
-    display: none; align-items: center; justify-content: center;
-    border-radius: 50%; cursor: pointer; z-index: 10001; font-size: 1.2rem;
-}
+/* ================= ZEN MODE & CURSOR ================= */
+body.zen-active .top-header, body.zen-active footer, body.zen-active .entropy-container { display: none !important; }
+#zen-exit { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--text-main); color: var(--bg-color); display: none; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; z-index: 10001; font-size: 1.2rem; }
 body.zen-active #zen-exit { display: flex; }
 
-/* ================= 10. DİL & MOBİL ================= */
+#custom-cursor { position: fixed; font-family: 'Times New Roman'; font-size: 24px; color: var(--cursor-color); mix-blend-mode: difference; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+
+/* DİL & MOBİL */
 [data-lang="en"], [data-lang="tr"] { display: none; }
 body.lang-en [data-lang="en"] { display: block; }
 body.lang-tr [data-lang="tr"] { display: block; }
@@ -204,6 +153,6 @@ body.lang-tr [data-lang="tr"] { display: block; }
     .main-title { font-size: 4rem; }
     .top-header { padding: 15px 20px; }
     .nav-controls { gap: 10px; }
-    .switch-wrapper span { display: none; } /* Mobilde yazıları gizle */
-    #custom-cursor, #neural-canvas { display: none; } /* Mobilde performansı koru */
+    .switch-wrapper span { display: none; }
+    #custom-cursor { display: none; }
 }
