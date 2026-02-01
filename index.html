@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ΔIf — Muhammet Enes Karaoğlan</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
 </head>
 
-<body class="lang-tr"> <div class="noise-overlay"></div>
-    <canvas id="neural-canvas"></canvas>
-    <div id="custom-cursor">Δ</div>
+<body class="lang-tr"> <div class="noise-overlay"></div> <canvas id="neural-canvas"></canvas> <div id="custom-cursor">Δ</div>
     <div id="zen-exit" onclick="toggleZen()">✕</div>
-    <audio id="bg-music" loop><source src="ambient.mp3" type="audio/mpeg"></audio>
+    
+    <audio id="bg-music" loop crossorigin="anonymous">
+        <source src="ambient.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="entropy-container">
-        <span style="writing-mode: vertical-rl; font-size: 0.6rem; letter-spacing: 0.2em;">ENTROPY</span>
+        <span class="entropy-label">CHAOS</span>
         <input type="range" min="0" max="100" value="0" id="entropy-slider" orient="vertical">
     </div>
 
@@ -37,14 +41,13 @@
             <a href="archive.html" class="nav-link">Archive</a>
             <a onclick="toggleZen()" class="nav-link">Zen</a>
             <a onclick="toggleMusic()" class="nav-link" id="music-btn">Sound</a>
-            <a onclick="toggleTheme()" class="nav-link">Theme</a>
             <a onclick="setLang('en')" class="nav-link">EN</a>
             <a onclick="setLang('tr')" class="nav-link">TR</a>
         </div>
     </header>
 
     <section class="hero-section">
-        <div class="hero-bg"><img src="cover.jpg" alt="Cover"></div>
+        <div class="hero-bg"><img src="cover.jpg" alt="Cover Art"></div>
         <div style="z-index: 10;">
             <h1 class="main-title">ΔIf</h1>
             
@@ -120,7 +123,7 @@
 
         </section>
 
-        <footer>
+        <footer class="reveal">
             <div style="margin-bottom: 10px; font-weight: 600;">Muhammet Enes Karaoğlan</div>
             <div class="footer-role">Designed & Curated by the Author</div>
             
@@ -134,19 +137,28 @@
     </main>
 
     <script>
-        // 1. KESİN AYRIM (STRICT REALITY LOGIC)
+        // ==========================================
+        // 1. STRICT REALITY LOGIC (KESİN AYRIM)
+        // ==========================================
         function toggleReality() {
             const isChecked = document.getElementById('reality-toggle').checked;
+            
             if (isChecked) {
+                // Excess Modu
                 document.body.classList.add('state-excess');
             } else {
+                // Absence Modu (Varsayılan)
                 document.body.classList.remove('state-excess');
             }
-            // Fizik motorunu yeniden başlat (Yeni kelimeleri yüklemek için)
-            setTimeout(splitWords, 100);
+
+            // Fizik motorunu resetle (Yeni kelimeleri yüklemek için)
+            // Kısa bir gecikme DOM'un güncellenmesini sağlar
+            setTimeout(splitWords, 150);
         }
 
-        // 2. BELİRGİN AĞ YAPISI (PHYSICS PARTICLES)
+        // ==========================================
+        // 2. BELİRGİN AĞ YAPISI (CANVAS)
+        // ==========================================
         const canvas = document.getElementById('neural-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray;
@@ -160,7 +172,7 @@
                 this.y = Math.random() * canvas.height;
                 this.directionX = (Math.random() * 0.4) - 0.2;
                 this.directionY = (Math.random() * 0.4) - 0.2;
-                this.size = Math.random() * 2 + 1; // Biraz daha büyük
+                this.size = Math.random() * 2 + 1; 
             }
             update() {
                 if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
@@ -170,7 +182,6 @@
                 
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                // Rengi biraz daha koyu/belirgin yap (0.3 opacity)
                 ctx.fillStyle = document.body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)';
                 ctx.fill();
             }
@@ -178,7 +189,8 @@
 
         function initParticles() {
             particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 12000; // Yoğunluk arttı
+            // Sayı formülü: Alan / 12000 (Daha yoğun nokta)
+            let numberOfParticles = (canvas.height * canvas.width) / 12000; 
             for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle());
         }
 
@@ -193,14 +205,15 @@
         }
 
         function connectParticles() {
-            let opacityValue = 1;
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
+                    // Mesafe hesapla
                     let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    
+                    // Bağlantı mesafesi
                     if (distance < (canvas.width/7) * (canvas.height/7)) {
-                        opacityValue = 1 - (distance / 20000);
+                        let opacityValue = 1 - (distance / 20000);
                         let color = document.body.classList.contains('dark-mode') ? '255,255,255' : '0,0,0';
-                        // Çizgi rengini belirginleştir
                         ctx.strokeStyle = 'rgba(' + color + ',' + opacityValue * 0.2 + ')'; 
                         ctx.lineWidth = 1;
                         ctx.beginPath();
@@ -211,52 +224,79 @@
                 }
             }
         }
+        
+        // Başlat
         initParticles();
         animateParticles();
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
+        window.addEventListener('resize', () => { 
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight; 
+            initParticles(); 
+        });
 
+        // ==========================================
         // 3. ENTROPİ MOTORU (UÇUŞAN KELİMELER)
+        // ==========================================
         const slider = document.getElementById('entropy-slider');
         let words = [];
 
         function splitWords() {
-            // Sadece görünür durumdaki (visible state) metinleri seç
-            let selector = document.body.classList.contains('state-excess') ? '.content-excess .physics-enabled' : '.content-absence .physics-enabled';
+            // Sadece şu an GÖRÜNÜR olan container'ı seç
+            // Excess mi Absence mı?
+            let selector = document.body.classList.contains('state-excess') 
+                ? '.content-excess .physics-enabled' 
+                : '.content-absence .physics-enabled';
             
+            // Seçili alandaki metinleri parçala
             document.querySelectorAll(selector).forEach(el => {
-                if(el.dataset.processed) return;
+                if(el.dataset.processed) return; // Zaten bölünmüşse dokunma
+                
                 const text = el.innerText;
                 const splitText = text.split(' ').map(word => `<span class="kinetic-word">${word} </span>`).join('');
                 el.innerHTML = splitText;
                 el.dataset.processed = "true";
             });
 
+            // Parçalanan kelimeleri fizik dizisine ekle
             setTimeout(() => {
-                words = []; // Listeyi sıfırla
+                words = []; // Listeyi temizle
                 document.querySelectorAll(selector + ' .kinetic-word').forEach(span => {
-                    words.push({
-                        element: span,
-                        x: 0, y: 0,
-                        vx: (Math.random() - 0.5) * 8, 
-                        vy: (Math.random() - 0.5) * 8
-                    });
+                    // Sadece ekranda yer kaplayanları al
+                    if(span.offsetParent !== null) {
+                        words.push({
+                            element: span,
+                            x: 0, y: 0,
+                            vx: (Math.random() - 0.5) * 8, // Rastgele Hız
+                            vy: (Math.random() - 0.5) * 8
+                        });
+                    }
                 });
             }, 300);
         }
+        
+        // Sayfa yüklenince kelimeleri hazırla
         window.addEventListener('load', splitWords);
 
         function animateEntropy() {
-            const entropy = slider.value;
+            const entropy = slider.value; // 0 - 100 arası değer
+            
             if (entropy > 0) {
                 words.forEach(word => {
+                    // Entropi arttıkça hareket alanı genişler
                     const movementScale = entropy / 10;
+                    
                     word.x += word.vx * (entropy / 60);
                     word.y += word.vy * (entropy / 60);
+                    
+                    // Sınır kontrolü (Geri sektirme)
                     if (Math.abs(word.x) > 50 * movementScale) word.vx *= -1;
                     if (Math.abs(word.y) > 50 * movementScale) word.vy *= -1;
+
+                    // Dönme ve kayma efekti
                     word.element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.x}deg)`;
                 });
             } else {
+                // Slider 0 ise her şeyi yerine koy
                 words.forEach(word => {
                     word.x = 0; word.y = 0;
                     word.element.style.transform = `translate(0,0)`;
@@ -266,31 +306,44 @@
         }
         animateEntropy();
 
-        // 4. SMART NAVBAR (KAYDIRINCA GİZLE/GÖSTER)
+        // ==========================================
+        // 4. SMART NAVBAR & SCROLL
+        // ==========================================
         let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
+            
+            // Aşağı iniyorsa ve belli bir mesafe gidildiyse gizle
             if (currentScroll > lastScroll && currentScroll > 100) {
                 document.body.classList.add('scroll-down');
                 document.body.classList.remove('scroll-up');
-            } else {
+            } 
+            // Yukarı çıkıyorsa göster
+            else {
                 document.body.classList.remove('scroll-down');
                 document.body.classList.add('scroll-up');
             }
             lastScroll = currentScroll;
 
-            // Reveal Efekti
+            // Reveal Animasyonu
             document.querySelectorAll(".reveal").forEach(el => {
                 if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
             });
         });
 
-        // 5. TEMEL FONKSİYONLAR
+        // ==========================================
+        // 5. YARDIMCI FONKSİYONLAR
+        // ==========================================
         function setLang(lang) {
             document.body.className = document.body.className.replace(/lang-\w+/, '');
             document.body.classList.add('lang-' + lang);
         }
-        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
+
+        // Tema değişince fizik motorunu ve canvas rengini güncellemek gerekebilir
+        function toggleTheme() { 
+            document.body.classList.toggle('dark-mode'); 
+        }
+        
         function toggleZen() { document.body.classList.toggle('zen-active'); }
         
         const audio = document.getElementById('bg-music');
@@ -298,20 +351,30 @@
             audio.paused ? (audio.play(), document.getElementById('music-btn').innerText = "Pause") : (audio.pause(), document.getElementById('music-btn').innerText = "Sound");
         }
         
+        // İmleç Takibi
         const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+        document.addEventListener('mousemove', e => { 
+            cursor.style.left = e.clientX + 'px'; 
+            cursor.style.top = e.clientY + 'px'; 
+        });
+        
+        // Hover Efektleri
         document.querySelectorAll('a, button, label, input').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
-        
+
+        // Başlangıç Yüklemesi
         window.onload = function() {
             splitWords();
             document.querySelectorAll(".reveal").forEach(el => el.classList.add("active"));
         };
+        
+        // Tab Title
         document.addEventListener("visibilitychange", () => {
             document.title = document.hidden ? "Missing..." : "ΔIf — Muhammet Enes Karaoğlan";
         });
     </script>
+
 </body>
 </html>
