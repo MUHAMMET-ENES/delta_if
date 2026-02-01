@@ -15,7 +15,9 @@
         <div class="fluid-blob blob-1"></div>
         <div class="fluid-blob blob-2"></div>
     </div>
-    <div class="noise-overlay"></div> <div id="custom-cursor">Δ</div>
+    <div class="noise-overlay"></div> 
+    
+    <div id="custom-cursor">Δ</div>
     <div id="zen-exit" onclick="toggleZen()">✕</div>
     
     <audio id="bg-music" loop crossorigin="anonymous">
@@ -52,12 +54,10 @@
         <div class="hero-bg"><img src="cover.jpg" alt="Cover Art"></div>
         <div style="z-index: 10;">
             <h1 class="main-title">ΔIf</h1>
-            
             <div class="hero-absence">
                 <div class="hero-questions content-en visible">What if it were missing?</div>
                 <div class="hero-questions content-tr">Ya hiç olmasaydı?</div>
             </div>
-
             <div class="hero-excess">
                 <div class="hero-questions content-en visible">What if it were excessive?</div>
                 <div class="hero-questions content-tr">Ya aşırı olsaydı?</div>
@@ -143,35 +143,31 @@
 
         function initAudio() {
             if (!isAudioInit) {
-                // AudioContext'i başlat
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 audioCtx = new AudioContext();
                 
                 audioElement = document.getElementById('bg-music');
                 source = audioCtx.createMediaElementSource(audioElement);
                 
-                // Stereo Panner (Sağ/Sol Dengeleyici)
+                // Stereo Panner: Sesin sağa/sola kaymasını sağlar
                 panner = audioCtx.createStereoPanner();
                 
-                // Bağlantı: Kaynak -> Panner -> Hoparlör
+                // Kaynak -> Panner -> Çıkış
                 source.connect(panner).connect(audioCtx.destination);
-                
                 isAudioInit = true;
                 
-                // İmleç Takibi ile Ses Yönlendirme
+                // İmleç Takibi ile Sesi Yönlendir
                 document.addEventListener('mousemove', (e) => {
-                    // Ekranın solu -1, ortası 0, sağı +1 olacak şekilde hesapla
+                    // Ekran genişliğine göre -1 (Sol) ile +1 (Sağ) arası değer
                     const width = window.innerWidth;
                     const xPos = e.clientX;
                     const panValue = (xPos / width) * 2 - 1;
-                    
-                    // Sesi kaydır
                     panner.pan.value = panValue;
                 });
             }
 
-            // Çal / Durdur
             if (audioElement.paused) {
+                audioCtx.resume();
                 audioElement.play();
                 document.getElementById('music-btn').innerText = "Pause";
             } else {
@@ -180,7 +176,7 @@
             }
         }
 
-        // 2. KESİN AYRIM (STRICT REALITY)
+        // 2. KESİN AYRIM (REALITY)
         function toggleReality() {
             const isChecked = document.getElementById('reality-toggle').checked;
             if (isChecked) {
@@ -268,7 +264,6 @@
             document.body.className = document.body.className.replace(/lang-\w+/, '');
             document.body.classList.add('lang-' + lang);
         }
-        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
         function toggleZen() { document.body.classList.toggle('zen-active'); }
         
         const cursor = document.getElementById('custom-cursor');
