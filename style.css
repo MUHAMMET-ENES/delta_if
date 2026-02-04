@@ -1,212 +1,208 @@
-diff --git a/style.css b/style.css
-index 8522f60d5103f7ff532e609c7dd61a6e2d4c5e1d..fba4a7b3d6452da6b56db1a98c6cd44307ea0407 100644
---- a/style.css
-+++ b/style.css
-@@ -20,50 +20,207 @@
- body.dark-mode {
-     --bg-color: #0a0a0a;
-     --text-main: #e0e0e0;
-     --text-muted: #888;
-     --line-color: #333;
-     /* Koyu modda da imleç beyaz kalmalı ki siyaha fark alıp beyaz görünsün */
-     --cursor-color: #ffffff; 
-     
-     --highlight: #f4a261;
-     --gradient-1: rgba(244, 162, 97, 0.1);
-     --gradient-2: rgba(50, 50, 50, 0.2);
- }
- 
- /* ================= TEMEL AYARLAR ================= */
- * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Standart imleci gizle */ }
- 
- body {
-     background-color: var(--bg-color);
-     color: var(--text-main);
-     font-family: var(--font-body);
-     line-height: 1.8;
-     overflow-x: hidden;
-     transition: background-color 0.5s ease, color 0.5s ease;
- }
- 
-+.home-hero {
-+    height: 100vh;
-+}
-+
-+.hero-content {
-+    position: relative;
-+    z-index: 1;
-+    max-width: 720px;
-+    padding: 0 30px;
-+}
-+
-+.hero-label {
-+    text-transform: uppercase;
-+    letter-spacing: 0.35em;
-+    font-size: 0.7rem;
-+    color: rgba(255, 255, 255, 0.7);
-+    margin-bottom: 20px;
-+}
-+
-+.hero-actions {
-+    display: flex;
-+    justify-content: center;
-+    align-items: center;
-+    gap: 20px;
-+    margin-top: 30px;
-+    flex-wrap: wrap;
-+}
-+
-+.cta-button {
-+    display: inline-flex;
-+    align-items: center;
-+    justify-content: center;
-+    padding: 14px 28px;
-+    border-radius: 999px;
-+    background: #ffffff;
-+    color: #111;
-+    text-decoration: none;
-+    font-size: 0.9rem;
-+    letter-spacing: 0.12em;
-+    text-transform: uppercase;
-+    transition: transform 0.3s ease, box-shadow 0.3s ease;
-+}
-+
-+.cta-button:hover {
-+    transform: translateY(-2px);
-+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-+}
-+
-+.cta-button.subtle {
-+    background: transparent;
-+    border: 1px solid var(--line-color);
-+    color: var(--text-main);
-+}
-+
-+.cta-link {
-+    color: rgba(255, 255, 255, 0.8);
-+    text-decoration: none;
-+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-+    padding-bottom: 4px;
-+    font-size: 0.85rem;
-+    letter-spacing: 0.18em;
-+    text-transform: uppercase;
-+}
-+
-+.intro-section,
-+.featured-section,
-+.themes-section,
-+.ritual-section {
-+    margin-bottom: 140px;
-+}
-+
-+.section-label {
-+    font-size: 0.75rem;
-+    text-transform: uppercase;
-+    letter-spacing: 0.3em;
-+    color: var(--text-muted);
-+    margin-bottom: 20px;
-+}
-+
-+.section-title {
-+    font-family: var(--font-heading);
-+    font-size: 2.8rem;
-+    margin-bottom: 20px;
-+}
-+
-+.essay-grid,
-+.theme-grid {
-+    display: grid;
-+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-+    gap: 30px;
-+}
-+
-+.essay-card,
-+.theme-card {
-+    border: 1px solid var(--line-color);
-+    border-radius: 18px;
-+    padding: 28px;
-+    background: rgba(255, 255, 255, 0.6);
-+    backdrop-filter: blur(6px);
-+    display: flex;
-+    flex-direction: column;
-+    gap: 16px;
-+}
-+
-+.essay-tag {
-+    font-size: 0.7rem;
-+    text-transform: uppercase;
-+    letter-spacing: 0.25em;
-+    color: var(--text-muted);
-+}
-+
-+.essay-card h3,
-+.theme-card h3 {
-+    font-family: var(--font-heading);
-+    font-size: 1.6rem;
-+}
-+
-+.text-link {
-+    color: var(--text-main);
-+    text-decoration: none;
-+    font-size: 0.85rem;
-+    letter-spacing: 0.2em;
-+    text-transform: uppercase;
-+}
-+
-+.text-link:hover {
-+    opacity: 0.7;
-+}
-+
-+.ritual-card {
-+    border: 1px solid var(--line-color);
-+    border-radius: 24px;
-+    padding: 32px;
-+    background: rgba(245, 243, 238, 0.7);
-+    display: flex;
-+    flex-direction: column;
-+    gap: 20px;
-+}
-+
-+.ritual-card ul {
-+    list-style: none;
-+    padding: 0;
-+}
-+
-+.ritual-card li {
-+    margin-bottom: 12px;
-+    padding-left: 24px;
-+    position: relative;
-+}
-+
-+.ritual-card li::before {
-+    content: \"—\";
-+    position: absolute;
-+    left: 0;
-+    color: var(--highlight);
-+}
-+
- /* ================= MODERN AKIŞKAN ARKA PLAN (FLUID) ================= */
- .fluid-background {
-     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-     z-index: -2; overflow: hidden; pointer-events: none;
- }
- .fluid-blob {
-     position: absolute;
-     filter: blur(80px);
-     opacity: 0.6;
-     animation: float 20s infinite ease-in-out;
-     border-radius: 50%;
- }
- .blob-1 {
-     top: -10%; left: -10%; width: 50vw; height: 50vw;
-     background: var(--gradient-1);
-     animation-delay: 0s;
- }
- .blob-2 {
-     bottom: -10%; right: -10%; width: 60vw; height: 60vw;
-     background: var(--gradient-2);
-     animation-delay: -10s;
- }
- 
- @keyframes float {
-     0% { transform: translate(0, 0) scale(1); }
+
+body.dark-mode {
+    --bg-color: #0a0a0a;
+    --text-main: #e0e0e0;
+    --text-muted: #888;
+    --line-color: #333;
+    /* Koyu modda da imleç beyaz kalmalı ki siyaha fark alıp beyaz görünsün */
+    --cursor-color: #ffffff; 
+    
+    --highlight: #f4a261;
+    --gradient-1: rgba(244, 162, 97, 0.1);
+    --gradient-2: rgba(50, 50, 50, 0.2);
+}
+
+/* ================= TEMEL AYARLAR ================= */
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Standart imleci gizle */ }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.home-hero {
+    height: 100vh;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    padding: 0 30px;
+}
+
+.hero-label {
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #111;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.subtle {
+    background: transparent;
+    border: 1px solid var(--line-color);
+    color: var(--text-main);
+}
+
+.cta-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 4px;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.intro-section,
+.featured-section,
+.themes-section,
+.ritual-section {
+    margin-bottom: 140px;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+.essay-grid,
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 30px;
+}
+
+.essay-card,
+.theme-card {
+    border: 1px solid var(--line-color);
+    border-radius: 18px;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.essay-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+}
+
+.essay-card h3,
+.theme-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+}
+
+.text-link {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.text-link:hover {
+    opacity: 0.7;
+}
+
+.ritual-card {
+    border: 1px solid var(--line-color);
+    border-radius: 24px;
+    padding: 32px;
+    background: rgba(245, 243, 238, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ritual-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ritual-card li {
+    margin-bottom: 12px;
+    padding-left: 24px;
+    position: relative;
+}
+
+.ritual-card li::before {
+    content: \"—\";
+    position: absolute;
+    left: 0;
+    color: var(--highlight);
+}
+
+/* ================= MODERN AKIŞKAN ARKA PLAN (FLUID) ================= */
+.fluid-background {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; overflow: hidden; pointer-events: none;
+}
+.fluid-blob {
+    position: absolute;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: float 20s infinite ease-in-out;
+    border-radius: 50%;
+}
+.blob-1 {
+    top: -10%; left: -10%; width: 50vw; height: 50vw;
+    background: var(--gradient-1);
+    animation-delay: 0s;
+}
+.blob-2 {
+    bottom: -10%; right: -10%; width: 60vw; height: 60vw;
+    background: var(--gradient-2);
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
