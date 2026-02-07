@@ -1,116 +1,109 @@
-/* --- ARCHIVE PAGE SPECIFIC STYLES --- */
-
-.archive-body {
-    background-color: #fdfbf7;
-    font-family: 'Courier Prime', 'Courier New', monospace; /* Monospace is key for "Archive" feel */
-    color: #1a1a1a;
+/* --- HERO SECTION (NEW) --- */
+#hero-display {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#archive-header {
-    padding: 2rem 4rem;
+.hero-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('../assets/cover.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* The "Cream Wash" - makes image semi-transparent */
+    background-color: var(--color-base); 
+    opacity: 0.85; 
+    z-index: -1;
+    backdrop-filter: blur(5px); /* Optional: slight blur for depth */
+}
+
+.hero-content {
+    z-index: 10;
+    text-align: center;
+    animation: fadeUp 1.5s ease-out;
+}
+
+.scroll-hint {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    font-family: var(--font-func);
+    letter-spacing: 2px;
+    opacity: 0.5;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-5px);}
+}
+
+/* --- SMART HEADER (NEW) --- */
+#smart-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #1a1a1a;
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000), 
+                background 0.3s ease;
+    /* Glassmorphism */
+    background: rgba(253, 251, 247, 0.0); /* Initially transparent */
 }
 
-#archive-header a {
-    text-decoration: none;
-    color: #1a1a1a;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.9rem;
+/* State: Scrolled Down (Hidden) */
+#smart-header.nav-hidden {
+    transform: translateY(-100%);
 }
 
-.archive-container {
-    max-width: 1000px;
-    margin: 4rem auto;
-    padding: 0 2rem;
+/* State: Scrolled Up (Visible + Background) */
+#smart-header.nav-visible {
+    transform: translateY(0);
+    background: rgba(253, 251, 247, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
-.system-status {
+.nav-center {
     display: flex;
     gap: 2rem;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    margin-bottom: 2rem;
-    border-bottom: 1px dotted #ccc;
-    padding-bottom: 1rem;
 }
 
-/* TABLE DESIGN */
-#archive-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-#archive-table th {
-    font-family: 'Inter', sans-serif; /* Contrast header font */
-    font-weight: 500;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid #1a1a1a;
-    letter-spacing: 0.1em;
-    font-size: 0.8rem;
-}
-
-#archive-table td {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #e0e0e0;
-    transition: all 0.2s ease;
-}
-
-#archive-table tr {
-    opacity: 0;
-    animation: slideIn 0.5s forwards ease-out;
-}
-
-@keyframes slideIn {
-    to { opacity: 1; transform: translateY(0); }
-    from { opacity: 0; transform: translateY(10px); }
-}
-
-/* Hover Effect: The "Selection" */
-#archive-table tr:hover td {
-    background-color: #1a1a1a;
-    color: #fdfbf7;
-    padding-left: 1rem; /* Slight jump for interaction feedback */
-    cursor: pointer;
-}
-
-#archive-table tr:hover a {
-    color: #fdfbf7;
-    border-bottom-color: #fdfbf7;
-}
-
-/* Column Specifics */
-.col-id { width: 15%; opacity: 0.5; }
-.col-subject { width: 45%; font-weight: bold; }
-.col-state { width: 20%; font-size: 0.85rem; }
-.col-access { width: 20%; text-align: right; }
-
-/* State Colors */
-.state-corrupt { color: #d93025; }
-.state-pending { opacity: 0.3; font-style: italic; }
-
-.access-link {
+.nav-item {
+    background: none;
+    border: none;
+    cursor: pointer; /* Use none/custom cursor in prod, but pointer logic is needed */
+    font-family: var(--font-func);
+    font-size: 0.9rem;
+    color: var(--color-ink);
     text-decoration: none;
-    color: #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    font-size: 0.8rem;
-    padding-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
 }
 
-/* Static Footer for Archive (No sliders) */
-.static-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 20px;
-    background: transparent;
-    pointer-events: none; /* Let clicks pass through if needed */
+.nav-item:hover {
+    opacity: 1;
 }
-.static-footer .author-credit {
-    pointer-events: auto;
-    margin-right: 4rem;
+
+.nav-item i {
+    font-size: 1.2rem;
 }
