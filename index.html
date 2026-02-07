@@ -6,37 +6,56 @@
     <title>ΔIf | Archive of Counterfactuals</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/typography.css">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="film-grain"></div>
-    
     <div class="ambient-blob blob-1"></div>
     <div class="ambient-blob blob-2"></div>
 
     <div id="cursor"></div>
 
-    <header id="main-header">
-        <div class="logo">ΔIf</div>
-        <nav>
-            <a href="about.html">Origin</a>
-            <a href="archive.html">Archive</a>
-            <button id="zen-mode-btn">Zen Mode</button>
+    <header id="smart-header">
+        <div class="nav-left">
+            <div class="logo">ΔIf</div>
+        </div>
+        
+        <nav class="nav-center">
+            <a href="about.html" class="nav-item">
+                <i class="ph ph-scroll"></i>
+                <span>Origin</span>
+            </a>
+            <a href="archive.html" class="nav-item">
+                <i class="ph ph-database"></i>
+                <span>Archive</span>
+            </a>
+            <button id="audio-toggle" class="nav-item">
+                <i class="ph ph-speaker-slash" id="audio-icon"></i>
+                <span>Sound Field</span>
+            </button>
         </nav>
+
+        <div class="nav-right">
+            <button id="zen-mode-btn" class="nav-item">
+                <i class="ph ph-eye-slash"></i>
+                <span>Zen</span>
+            </button>
+        </div>
     </header>
 
-    <div id="start-overlay">
-        <p>Enter the Archive</p>
-    </div>
+    <section id="hero-display">
+        <div class="hero-bg"></div> <div class="hero-overlay"></div> <div class="hero-content">
+            <h1 id="dynamic-title" class="italic-header">What if it were missing?</h1>
+            <p class="scroll-hint">Scroll to init_physics</p>
+        </div>
+    </section>
 
     <main>
-        <section class="hero">
-            <h1 id="dynamic-title" class="italic-header">What if it were missing?</h1>
-        </section>
-
         <article id="reality-container">
-            
             <div id="state-absence" class="state active">
                 <p class="physics-text">
                     In the beginning, there was <span>silence</span>. The <span>void</span> is not empty; it is a <span>pregnant</span> pause. 
@@ -50,29 +69,28 @@
                     The <span>data</span> screams. Overwhelming <span>saturation</span> of the optic nerve. 
                     More <span>pixels</span>. More <span>noise</span>. More <span>flesh</span>.
                     The <span>infinite</span> scroll consumes the finite <span>mind</span>.
-                    Everything is happening <span>everywhere</span> all at <span>once</span>.
                 </p>
             </div>
-
         </article>
     </main>
 
     <footer id="controls">
         <div class="control-group">
-            <label>Reality Switch</label>
+            <label><i class="ph ph-arrows-left-right"></i> Reality</label>
             <button id="reality-switch">Switch to Excess</button>
         </div>
         <div class="control-group">
-            <label>Entropy Level</label>
+            <label><i class="ph ph-wind"></i> Entropy</label>
             <input type="range" id="entropy-slider" min="0" max="100" value="0">
         </div>
         <div class="author-credit">
-            Designed by M.E. Karaoğlan
+            <p>© The One Who Assumed</p>
+            <a href="#" class="license-link">CC BY-NC-ND 4.0</a>
         </div>
     </footer>
 
     <script type="module" src="js/audio-engine.js"></script>
     <script type="module" src="js/physics-engine.js"></script>
     <script type="module" src="js/duality.js"></script>
-</body>
+    <script type="module" src="js/ui-manager.js"></script> </body>
 </html>
