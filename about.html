@@ -1,1 +1,34 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ΔIf | Origin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; }
+        #manifesto { font-family: 'Courier New', monospace; max-width: 600px; font-size: 1.1rem; }
+        .cursor-blink { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div id="manifesto"></div>
+    <script>
+        const text = "We exist in the spaces between the data. The archive is not a record of what happened, but a repository of what was felt when the world became too loud, or too quiet. \n\n[End of Log]";
+        const container = document.getElementById('manifesto');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                container.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50); // Typing speed
+            } else {
+                container.innerHTML += '<span class="cursor-blink">|</span>';
+                setTimeout(() => window.location.href = "index.html", 3000); // Auto return
+            }
+        }
+        typeWriter();
+    </script>
+</body>
+</html>
