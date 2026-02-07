@@ -1,103 +1,53 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive — ΔIf</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
+    <title>ΔIf | System Log</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&family=Courier+Prime&display=swap" rel="stylesheet">
 </head>
+<body class="archive-body">
 
-<body class="lang-tr">
+    <header id="archive-header">
+        <div class="logo">ΔIf // ARCHIVE</div>
+        <nav>
+            <a href="index.html">← Return to Reality</a>
+        </nav>
+    </header>
 
-    <div id="custom-cursor">Δ</div>
-    <audio id="bg-music" loop><source src="ambient.mp3" type="audio/mpeg"></audio>
-
-    <div class="top-header" style="position:fixed; width:100%; top:0; background:var(--bg-color); z-index:99;">
-        <div class="brand-name"><a href="index.html" style="text-decoration:none; color:inherit;">← ΔIf / RETURN</a></div>
-        
-        <div class="nav-row">
-            <button class="tool-btn" onclick="toggleTheme()">Theme</button>
-            <button class="tool-btn" onclick="setLang('en')">EN</button>
-            <button class="tool-btn" onclick="setLang('tr')">TR</button>
-        </div>
-    </div>
-
-    <main class="page-container" style="max-width:1200px;">
-
-        <div class="archive-header reveal">
-            <h1 class="archive-title">The Archive</h1>
-            <p data-lang="en" style="max-width:500px;">A non-linear log of assumptions, fragments, and errors. Nothing here is final.</p>
-            <p data-lang="tr" style="max-width:500px;">Varsayımların, parçaların ve hataların doğrusal olmayan kaydı. Burada hiçbir şey nihai değildir.</p>
-
-            <div class="archive-filters">
-                <button class="filter-btn active">All</button>
-                <button class="filter-btn">Essays</button>
-                <button class="filter-btn">Fragments</button>
-                <button class="filter-btn">Glitches</button>
-            </div>
+    <main class="archive-container">
+        <div class="system-status">
+            <span>STATUS: ONLINE</span>
+            <span>ENTROPY: 0%</span>
+            <span>LIC: CC BY-NC-ND 4.0</span>
         </div>
 
-        <div class="archive-list">
-            
-            <a href="index.html" class="archive-row reveal">
-                <span class="row-id">LOG_001</span>
-                <span class="row-title" data-lang="en">Assumption of Absence</span>
-                <span class="row-title" data-lang="tr">Yokluk Varsayımı</span>
-                <span class="row-meta">Core Essay</span>
-                <span class="row-arrow">→</span>
-            </a>
-
-            <a href="index.html" class="archive-row reveal">
-                <span class="row-id">LOG_002</span>
-                <span class="row-title" data-lang="en">Assumption of Excess</span>
-                <span class="row-title" data-lang="tr">Aşırılık Varsayımı</span>
-                <span class="row-meta">Core Essay</span>
-                <span class="row-arrow">→</span>
-            </a>
-
-            <div class="archive-row reveal" style="opacity:0.5; cursor:not-allowed;">
-                <span class="row-id">ERR_404</span>
-                <span class="row-title" data-lang="en">The Memory Leak</span>
-                <span class="row-title" data-lang="tr">Bellek Sızıntısı</span>
-                <span class="row-meta">Fragment (Coming Soon)</span>
-                <span class="row-arrow">🔒</span>
-            </div>
-
-        </div>
-
-        <footer style="border:none; margin-top:50px;">
-            <p>© 2026 ΔIf | Archive Log</p>
-        </footer>
-
+        <table id="archive-table">
+            <thead>
+                <tr>
+                    <th class="col-id">ID</th>
+                    <th class="col-subject">SUBJECT</th>
+                    <th class="col-state">STATE</th>
+                    <th class="col-access">ACCESS</th>
+                </tr>
+            </thead>
+            <tbody id="archive-list">
+                </tbody>
+        </table>
     </main>
 
-    <script>
-        // Dil Kontrolü
-        function setLang(lang) {
-            document.body.className = document.body.className.replace(/lang-\w+/, '');
-            document.body.classList.add('lang-' + lang);
-        }
-        // Tema Kontrolü
-        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
-        
-        // İmleç
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
-        document.querySelectorAll('a, button').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-        });
+    <footer id="controls" class="static-footer">
+        <div class="author-credit">
+            <p>© The One Who Assumed</p>
+            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="license" class="license-link">
+                CC BY-NC-ND 4.0
+            </a>
+        </div>
+    </footer>
 
-        // Reveal
-        function reveal() {
-            document.querySelectorAll(".reveal").forEach(el => {
-                if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
-            });
-        }
-        window.addEventListener("scroll", reveal);
-        window.onload = reveal;
-    </script>
+    <script type="module" src="js/archive-engine.js"></script>
 </body>
 </html>
