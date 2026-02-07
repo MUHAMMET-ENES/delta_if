@@ -1,31 +1,25 @@
-/*
- * UI MANAGER
- * Handles Scroll Direction & Header Visibility
- */
-
+/* UI MANAGER: Handle Scroll Visibility */
 const header = document.getElementById('smart-header');
 let lastScrollY = window.scrollY;
 
 window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
 
-    // Determine direction
-    if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        // Scrolling DOWN -> Hide Header
+    // Show header if at the very top
+    if (currentScrollY < 50) {
+        header.classList.remove('nav-hidden');
+        header.classList.remove('nav-visible'); // Transparent at top
+        return;
+    }
+
+    if (currentScrollY > lastScrollY) {
+        // Scroll Down -> Hide
         header.classList.add('nav-hidden');
         header.classList.remove('nav-visible');
     } else {
-        // Scrolling UP -> Show Header
+        // Scroll Up -> Show
         header.classList.remove('nav-hidden');
         header.classList.add('nav-visible');
     }
-
-    // Special case: At very top, remove background
-    if (currentScrollY < 10) {
-        header.classList.remove('nav-visible');
-        header.style.background = 'transparent';
-        header.style.boxShadow = 'none';
-    }
-
     lastScrollY = currentScrollY;
 });
