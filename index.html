@@ -1,192 +1,78 @@
-
-<html lang="tr">
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — ΔIf</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Courier+New&display=swap" rel="stylesheet">
-    <title>ΔIf — Philosophy Writings</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%2250%22 x=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 alignment-baseline=%22central%22 fill=%22white%22 font-family=%22serif%22>Δ</text></svg>">
+    <title>ΔIf | Archive of Counterfactuals</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 </head>
-
-<body class="lang-tr" style="overflow-y:auto; background: var(--bg-color);">
-<body class="lang-en">
-    <div id="custom-cursor">Δ</div>
-
-    <div id="custom-cursor"></div>
+<body>
+    <div class="film-grain"></div>
     
-    <div class="top-header" style="background: transparent; backdrop-filter: none; border: none;">
-        <div class="brand-name">
-            <a href="index.html" style="text-decoration:none; color:var(--text-main); font-size: 0.9rem;">← RETURN TO REALITY</a>
-    <header class="top-header">
-        <div class="brand-name">ΔIf</div>
-        <nav class="nav-controls">
-            <a class="nav-link" href="archive.html">Archive</a>
-            <a class="nav-link" href="#about">About</a>
-            <a class="nav-link" href="#themes">Themes</a>
-            <a class="nav-link" href="mailto:hello@deltaif.studio">Contact</a>
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+
+    <div id="cursor"></div>
+
+    <header id="main-header">
+        <div class="logo">ΔIf</div>
+        <nav>
+            <a href="about.html">Origin</a>
+            <a href="archive.html">Archive</a>
+            <button id="zen-mode-btn">Zen Mode</button>
         </nav>
     </header>
 
-    <section class="hero-section home-hero">
-        <div class="hero-bg">
-            <img src="cover.jpg" alt="Soft light falling on a desk with notebooks.">
-        </div>
-        <div class="nav-controls">
-            <a onclick="setLang('en')" class="nav-link" style="cursor: pointer;">EN</a>
-            <a onclick="setLang('tr')" class="nav-link" style="cursor: pointer;">TR</a>
-        <div class="hero-content">
-            <p class="hero-label">Philosophy Writings</p>
-            <h1 class="main-title">ΔIf</h1>
-            <p class="hero-questions">A studio of conditional thought, where every essay begins with a single altered premise.</p>
-            <div class="hero-actions">
-                <a class="cta-button" href="archive.html">Enter the archive</a>
-                <a class="cta-link" href="#about">Read the statement</a>
-            </div>
-        </div>
+    <div id="start-overlay">
+        <p>Enter the Archive</p>
     </div>
-    </section>
 
-    <div class="page-container" style="padding-top:150px; text-align:center; min-height: 80vh;">
-        <div class="desk-icon" style="font-size:4rem; margin-bottom:40px; opacity: 0.8;">📓</div>
-        
-        <div id="manifesto-area" style="text-align:left; font-family:'Courier New', monospace; max-width:650px; margin:0 auto; line-height:1.6; font-size:1.05rem; white-space: pre-wrap; color: var(--text-main);">
-            <span id="manifesto-text"></span><span class="cursor-blink" style="font-weight: bold; color: var(--highlight);">|</span>
-        </div>
-    </div>
-    <main class="page-container">
-        <section id="about" class="intro-section">
-            <div class="section-label">Statement</div>
-            <h2 class="section-title">Writing as a test of conditions.</h2>
-            <p>
-                ΔIf is a collection of essays, fragments, and meditations that explore what remains when a single
-                condition is removed, reversed, or intensified. Rather than seeking conclusions, each piece follows
-                the consequences of an assumption until it begins to fray.
-            </p>
-            <p>
-                These writings are meant to be read slowly, revisited, and kept open. They are not answers. They are
-                deliberate experiments in attention.
-            </p>
+    <main>
+        <section class="hero">
+            <h1 id="dynamic-title" class="italic-header">What if it were missing?</h1>
         </section>
 
-    <script>
-        // Metinler
-        const manifestoTR = `HAKKINDA — ΔIf\n\nVar olanı açıklamak için yazmıyorum.\nBir koşul değiştiğinde geriye ne kaldığını görmek için yazıyorum.\n\nΔIf, küçük ama kalıcı bir rahatsızlıktan doğdu:\nçoğu anlatı, gerçekliği sanki kaçınılmazmış gibi sunuyor.\nBeni ilgilendiren şey, bu kaçınılmazlık askıya alındığında ortaya çıkan boşluk.\n\nBuradaki her metin bir varsayımla başlar.\nKanıtlanması gereken bir hipotez olarak değil,\ngeçici olarak takılan bir bakış biçimi olarak.\n\nEğer bir şey eksik olsaydı ne olurdu?\nEğer bir şey fazla olsaydı, ne bozulurdu?\nAnlam hangi noktada incelir — ya da çöker?\n\nSonuç aramıyorum.\nSonuçların izini sürüyorum.\n\nBu arşiv kronolojik değil.\nTematik, döngüsel ve bilinçli biçimde eksik.\nMetinler ilerlemez;\nbirbirine uzaktan seslenir.\n\nSeçilmiş bir rumuzla yazıyorum.\nBu, kimliği saklamak için değil,\nyorumu merkezinden çekmek için.\nBurada odakta olan yazar değil, koşuldur.\n\nΔIf cevapların bir toplamı değil.\nKarşı-olgusal bir dikkat alanıdır.\n\nEğer buradaki bir metin seni huzursuz ediyorsa,\nmuhtemelen işini yapmıştır.\n\n— Varsayımı Üstlenen.`;
-        const manifestoEN = `ABOUT — ΔIf\n\nI do not write to explain what exists.\nI write to test what remains when a condition is altered.\n\nΔIf was born from a simple discomfort:\nmost narratives describe reality as if it were inevitable.\nI am interested in what happens when inevitability is suspended.\n\nEach text here begins with an assumption.\nNot as a hypothesis to be proven,\nbut as a lens to be worn temporarily.\n\nWhat if something essential were missing?\nWhat if something familiar became excessive?\nAt what point does meaning thin out — or collapse?\n\nI do not seek conclusions.\nI trace consequences.\n\nThis archive is not chronological.\nIt is thematic, recursive, and deliberately incomplete.\nTexts speak to one another across distance,\nas assumptions echo rather than progress.\n\nI write under a chosen name,\nnot to conceal identity,\nbut to remove it from the center of interpretation.\nThe focus is the condition — not its author.\n\nΔIf is not a collection of answers.\nIt is a space for counterfactual attention.\n\nIf something here unsettles you,\nit has likely done its work.\n\n— The One Who Assumed`;
-        <section class="featured-section">
-            <div class="section-label">Featured</div>
-            <h2 class="section-title">Selected essays</h2>
-            <div class="essay-grid">
-                <article class="essay-card">
-                    <span class="essay-tag">Core Essay</span>
-                    <h3>Assumption of Absence</h3>
-                    <p>What disappears first is not the object, but the belief that it was ever necessary.</p>
-                    <a href="absence.html" class="text-link">Read essay →</a>
-                </article>
-                <article class="essay-card">
-                    <span class="essay-tag">Core Essay</span>
-                    <h3>Assumption of Excess</h3>
-                    <p>When abundance replaces clarity, meaning stretches until it tears at its own edges.</p>
-                    <a href="excess.html" class="text-link">Read essay →</a>
-                </article>
+        <article id="reality-container">
+            
+            <div id="state-absence" class="state active">
+                <p class="physics-text">
+                    In the beginning, there was <span>silence</span>. The <span>void</span> is not empty; it is a <span>pregnant</span> pause. 
+                    <span class="hidden-ink">The truth is written in white ink.</span>
+                    We define ourselves by what we <span>refuse</span> to become.
+                </p>
             </div>
-        </section>
 
-        let currentLang = 'tr';
-        <section id="themes" class="themes-section">
-            <div class="section-label">Themes</div>
-            <h2 class="section-title">Recurring questions</h2>
-            <div class="theme-grid">
-                <div class="theme-card">
-                    <h3>Counterfactual attention</h3>
-                    <p>What if the world were missing something we take for granted? How does attention change?</p>
-                </div>
-                <div class="theme-card">
-                    <h3>Thresholds of meaning</h3>
-                    <p>At what point does meaning thin out, and what forms of language remain once it collapses?</p>
-                </div>
-                <div class="theme-card">
-                    <h3>Ethics of the incomplete</h3>
-                    <p>What does it mean to live with open endings, and how does uncertainty shape responsibility?</p>
-                </div>
+            <div id="state-excess" class="state hidden">
+                <p class="physics-text">
+                    The <span>data</span> screams. Overwhelming <span>saturation</span> of the optic nerve. 
+                    More <span>pixels</span>. More <span>noise</span>. More <span>flesh</span>.
+                    The <span>infinite</span> scroll consumes the finite <span>mind</span>.
+                    Everything is happening <span>everywhere</span> all at <span>once</span>.
+                </p>
             </div>
-        </section>
 
-        // Daktilo Efekti
-        function typeWriter(text, i, elementId) {
-            if (i < text.length) {
-                document.getElementById(elementId).innerHTML += text.charAt(i);
-                setTimeout(() => typeWriter(text, i + 1, elementId), 25); // Hız ayarı
-            }
-        }
-        <section class="ritual-section">
-            <div class="section-label">Practice</div>
-            <h2 class="section-title">How to read this archive</h2>
-            <div class="ritual-card">
-                <ul>
-                    <li>Read one essay at a time, with space between them.</li>
-                    <li>Return to a line that unsettles you and follow its consequence.</li>
-                    <li>Write your own counterfactual and let it sit for a day.</li>
-                </ul>
-                <a href="archive.html" class="cta-button subtle">Browse all writings</a>
-            </div>
-        </section>
+        </article>
     </main>
 
-        // Dil Değiştirme ve Yazmayı Başlatma
-        function setLang(lang) {
-            if(currentLang === lang && document.getElementById('manifesto-text').innerHTML.length > 0) return;
-            currentLang = lang;
-            document.body.className = 'lang-' + lang;
-            document.getElementById('manifesto-text').innerHTML = ''; // Temizle
-            // Seçili dile göre yazmaya başla
-            typeWriter(lang === 'tr' ? manifestoTR : manifestoEN, 0, 'manifesto-text');
-        }
-        
-        // Sayfa yüklendiğinde Türkçe başla
-        window.onload = () => setLang('tr');
-    <footer>
-        <p>© 2026 ΔIf — Philosophy Writings</p>
-        <div class="footer-role">Curated by the one who assumes.</div>
+    <footer id="controls">
+        <div class="control-group">
+            <label>Reality Switch</label>
+            <button id="reality-switch">Switch to Excess</button>
+        </div>
+        <div class="control-group">
+            <label>Entropy Level</label>
+            <input type="range" id="entropy-slider" min="0" max="100" value="0">
+        </div>
+        <div class="author-credit">
+            Designed by M.E. Karaoğlan
+        </div>
     </footer>
 
-        // İmleç Takibi
-    <script>
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', e => { 
-            cursor.style.left = e.clientX + 'px'; 
-            cursor.style.top = e.clientY + 'px'; 
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
-        });
-        
-        // Hover Efektleri
-
-        document.querySelectorAll('a').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-        });
-
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll <= 0) {
-                document.body.classList.remove('scroll-up');
-                return;
-            }
-            if (currentScroll > lastScroll && !document.body.classList.contains('scroll-down')) {
-                document.body.classList.remove('scroll-up');
-                document.body.classList.add('scroll-down');
-            } else if (currentScroll < lastScroll && document.body.classList.contains('scroll-down')) {
-                document.body.classList.remove('scroll-down');
-                document.body.classList.add('scroll-up');
-            }
-            lastScroll = currentScroll;
-        });
-    </script>
+    <script type="module" src="js/audio-engine.js"></script>
+    <script type="module" src="js/physics-engine.js"></script>
+    <script type="module" src="js/duality.js"></script>
 </body>
 </html>
