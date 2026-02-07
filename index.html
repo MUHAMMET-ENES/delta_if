@@ -3,54 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ΔIf | Archive of Counterfactuals</title>
+    <title>ΔIf | Archive</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/typography.css">
     
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="film-grain"></div>
-    <div class="ambient-blob blob-1"></div>
-    <div class="ambient-blob blob-2"></div>
-
+    
     <div id="cursor"></div>
 
     <header id="smart-header">
-        <div class="nav-left">
-            <div class="logo">ΔIf</div>
-        </div>
+        <div class="logo" style="font-weight: bold;">ΔIf</div>
         
-        <nav class="nav-center">
-            <a href="about.html" class="nav-item">
-                <i class="ph ph-scroll"></i>
-                <span>Origin</span>
+        <nav class="nav-menu">
+            <a href="about.html" class="tactile-key">
+                <i class="ph ph-scroll"></i> Origin
             </a>
-            <a href="archive.html" class="nav-item">
-                <i class="ph ph-database"></i>
-                <span>Archive</span>
-            </a>
-            <button id="audio-toggle" class="nav-item">
-                <i class="ph ph-speaker-slash" id="audio-icon"></i>
-                <span>Sound Field</span>
+            <button id="audio-toggle" class="tactile-key">
+                <i class="ph ph-speaker-slash" id="audio-icon"></i> Sound
             </button>
+            <a href="archive.html" class="tactile-key">
+                <i class="ph ph-database"></i> Log
+            </a>
         </nav>
 
-        <div class="nav-right">
-            <button id="zen-mode-btn" class="nav-item">
-                <i class="ph ph-eye-slash"></i>
-                <span>Zen</span>
-            </button>
+        <div class="nav-end">
+             <button id="zen-mode" class="tactile-key">Zen</button>
         </div>
     </header>
 
-    <section id="hero-display">
-        <div class="hero-bg"></div> <div class="hero-overlay"></div> <div class="hero-content">
-            <h1 id="dynamic-title" class="italic-header">What if it were missing?</h1>
-            <p class="scroll-hint">Scroll to init_physics</p>
+    <section id="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-wash"></div>
+        
+        <h1 class="hero-title">What if it were missing?</h1>
+        
+        <div class="arrow-key-container">
+            <div class="tactile-key arrow-key">
+                <i class="ph ph-arrow-down"></i>
+            </div>
         </div>
     </section>
 
@@ -59,38 +52,47 @@
             <div id="state-absence" class="state active">
                 <p class="physics-text">
                     In the beginning, there was <span>silence</span>. The <span>void</span> is not empty; it is a <span>pregnant</span> pause. 
-                    <span class="hidden-ink">The truth is written in white ink.</span>
-                    We define ourselves by what we <span>refuse</span> to become.
+                    The truth is written in white ink.
                 </p>
             </div>
-
             <div id="state-excess" class="state hidden">
                 <p class="physics-text">
-                    The <span>data</span> screams. Overwhelming <span>saturation</span> of the optic nerve. 
+                    The <span>data</span> screams. Overwhelming <span>saturation</span>. 
                     More <span>pixels</span>. More <span>noise</span>. More <span>flesh</span>.
-                    The <span>infinite</span> scroll consumes the finite <span>mind</span>.
                 </p>
             </div>
         </article>
     </main>
 
-    <footer id="controls">
-        <div class="control-group">
-            <label><i class="ph ph-arrows-left-right"></i> Reality</label>
-            <button id="reality-switch">Switch to Excess</button>
-        </div>
-        <div class="control-group">
-            <label><i class="ph ph-wind"></i> Entropy</label>
-            <input type="range" id="entropy-slider" min="0" max="100" value="0">
-        </div>
-        <div class="author-credit">
-            <p>© The One Who Assumed</p>
-            <a href="#" class="license-link">CC BY-NC-ND 4.0</a>
+    <footer id="controls-footer">
+        <button id="reality-switch" class="tactile-key">
+            <i class="ph ph-arrows-left-right"></i> Switch Reality
+        </button>
+        
+        <div class="tactile-key" style="padding: 5px 15px;">
+             <i class="ph ph-wind"></i>
+             <input type="range" id="entropy-slider" min="0" max="100" value="0" style="margin-left: 10px;">
         </div>
     </footer>
 
     <script type="module" src="js/audio-engine.js"></script>
     <script type="module" src="js/physics-engine.js"></script>
     <script type="module" src="js/duality.js"></script>
-    <script type="module" src="js/ui-manager.js"></script> </body>
+    <script type="module" src="js/ui-manager.js"></script>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        // Mouse Move
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        // Hover Interactions
+        const interactive = document.querySelectorAll('a, button, input');
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+        });
+    </script>
+</body>
 </html>
